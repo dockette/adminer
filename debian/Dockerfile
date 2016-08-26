@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
         php7.0-mysql \
         php7.0-sqlite \
         php7.0-mongo && \
-    wget https://www.adminer.org/static/download/${ADMINER_VERSION}/adminer-${ADMINER_VERSION}.php -O /srv/index.php && \
+    wget https://www.adminer.org/static/download/$ADMINER_VERSION/adminer-$ADMINER_VERSION.php -O /srv/index.php && \
     apt-get remove -y wget && apt-get clean -y && apt-get autoclean -y && apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* /var/lib/log/* /tmp/* /var/tmp/*
 

@@ -10,7 +10,6 @@ RUN apk update && apk upgrade && \
         ca-certificates \
         php5 \
         php5-pgsql \
-        php5-mongo \
         php5-mysql && \
     wget https://www.adminer.org/static/download/$ADMINER_VERSION/adminer-$ADMINER_VERSION.php -O /srv/index.php && \
     apk del wget ca-certificates && \

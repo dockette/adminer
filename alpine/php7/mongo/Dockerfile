@@ -9,6 +9,7 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
     apk add \
         wget \
         ca-certificates \
+        php7@testing \
         php7-session@testing \
         php7-mongodb@testing && \
     wget https://www.adminer.org/static/download/$ADMINER_VERSION/adminer-$ADMINER_VERSION.php -O /srv/index.php && \

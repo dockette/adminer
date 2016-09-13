@@ -12,7 +12,8 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         php7@testing \
         php7-session@testing \
         php7-mysqli@testing \
-        php7-pgsql@testing && \
+        php7-pgsql@testing \
+        php7-mongodb@testing && \
     wget https://www.adminer.org/static/download/$ADMINER_VERSION/adminer-$ADMINER_VERSION.php -O /srv/index.php && \
     apk del wget ca-certificates && \
     rm -rf /var/cache/apk/*

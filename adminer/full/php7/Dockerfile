@@ -13,7 +13,7 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         php7.1-session@testing \
         php7.1-mysqli@testing \
         php7.1-pgsql@testing \
-        php7.1-mongodb@testing && \
+        php7-mongodb@testing && \
         wget https://github.com/vrana/adminer/releases/download/v$ADMINER_VERSION/adminer-$ADMINER_VERSION.php -O /srv/index.php && \
     apk del wget ca-certificates && \
     rm -rf /var/cache/apk/*

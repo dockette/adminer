@@ -1,38 +1,67 @@
-# Adminer
+# Adminer / Adminer Editor
 
 [![Docker Stars](https://img.shields.io/docker/stars/dockette/adminer.svg?style=flat)](https://hub.docker.com/r/dockette/adminer/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/dockette/adminer.svg?style=flat)](https://hub.docker.com/r/dockette/adminer/)
 
-## Image
+## Adminer
 
-### Extensions
+> Database management in a single PHP file.
 
-- mysql
-- pgsql
-- sqlite
-- mongo
+You should take a look to the official github profile (https://github.com/vrana/adminer).
 
-## Usage
+![Adminer](https://rawgit.com/dockette/adminer/master/.docs/assets/adminer.png)
+
+### Prolog
+
+There are few variants of this adminer image:
+
+- full (mysql, pgsql, sqlite, mongo)
+- mysql (only)
+- pgsql (only)
+- mongo (only)
+
+### Usage
 
 ```sh
 docker run \
     --rm
-    -p 80:80
-    dockette/adminer
+    -p 8000:80
+    dockette/adminer:full
 ```
 
-## Variants
+### Tags
 
 | Image                        | Technologies                          | Size | Docker Hub                                              |
 |------------------------------|---------------------------------------|------|---------------------------------------------------------|
 | dockette/adminer             | MySQL / PostgreSQL / MongoDB / Sqlite | 12mb | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
-| dockette/adminer:full-php7   | MySQL/ PostgreSQL / MongoDB / Sqlite  | 12mb | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
-| dockette/adminer:mysql-php7  | MySQL                                 | 9mb  | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
-| dockette/adminer:pgsql-php7  | PostgreSQL                            | 8mb  | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
-| dockette/adminer:mongo-php7  | MongoDB                               | 9mb  | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
-| dockette/adminer:full-php5   | MySQL/ PostgreSQL / MongoDB / Sqlite  | 10mb | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
+| dockette/adminer:full        | MySQL / PostgreSQL / MongoDB / Sqlite | 12mb | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
+| dockette/adminer:mysql       | MySQL                                 | 9mb  | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
+| dockette/adminer:pgsql       | PostgreSQL                            | 8mb  | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
+| dockette/adminer:mongo       | MongoDB                               | 9mb  | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
+| dockette/adminer:full-php5   | MySQL / PostgreSQL / MongoDB / Sqlite | 10mb | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
 | dockette/adminer:mysql-php5  | MySQL                                 | 9mb  | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
 | dockette/adminer:pgsql-php5  | PostgreSQL                            | 10mb | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
 | dockette/adminer:mongo-php5  | MongoDB                               | 10mb | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
-| dockette/adminer:debian-php5 | MySQL/ PostgreSQL / MongoDB / Sqlite  | 70mb | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
-| dockette/adminer:debian-php7 | MySQL / PostgreSQL / MongoDB / Sqlite | 87mb | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
+
+## Adminer DG
+
+> Customization for the best database management tool written in PHP, Adminer
+
+You should take a look to the official github profile (https://github.com/dg/adminer-custom).
+
+![Adminer DG](https://rawgit.com/dockette/adminer/master/.docs/assets/adminer-dg.png)
+
+### Usage
+
+```sh
+docker run \
+    --rm
+    -p 8000:80
+    dockette/adminer:dg
+```
+
+### Tags
+
+| Image                        | Technologies                          | Size | Docker Hub                                              |
+|------------------------------|---------------------------------------|------|---------------------------------------------------------|
+| dockette/adminer:dg          | MySQL / PostgreSQL / MongoDB / Sqlite | 12mb | [link](https://hub.docker.com/r/dockette/adminer/tags/) |

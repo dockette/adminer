@@ -13,6 +13,7 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         php7.1-session@testing \
         php7.1-mysqli@testing \
         php7.1-pgsql@testing \
+        php7.1-json@testing \
         php7-mongodb@testing && \
     wget https://github.com/dg/adminer-custom/archive/v$ADMINER_DG_VERION.tar.gz -O /srv/adminer.tgz && \
     tar zxvf /srv/adminer.tgz --strip-components=1 -C /srv && \

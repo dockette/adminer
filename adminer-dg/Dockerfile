@@ -2,7 +2,7 @@ FROM alpine:edge
 
 MAINTAINER Milan Sulc <sulcmil@gmail.com>
 
-ENV ADMINER_DG_VERION=1.9.0
+ENV ADMINER_DG_VERION=1.9.1
 
 RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
     apk update && apk upgrade && \

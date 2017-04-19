@@ -2,7 +2,7 @@ FROM alpine:edge
 
 MAINTAINER Milan Sulc <sulcmil@gmail.com>
 
-ENV ADMINER_VERSION=4.3.0
+ENV ADMINER_VERSION=4.3.1
 
 RUN apk update && apk upgrade && \
     apk add \

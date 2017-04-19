@@ -1,17 +1,18 @@
-FROM alpine:edge
+FROM dockette/alpine:3.5
 
 MAINTAINER Milan Sulc <sulcmil@gmail.com>
 
 ENV ADMINER_VERSION=4.3.1
 
-RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
+RUN echo '@community http://nl.alpinelinux.org/alpine/v3.5/community' >> /etc/apk/repositories && \
+    echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
     apk update && apk upgrade && \
     apk add \
         wget \
         ca-certificates \
-        php7@testing \
-        php7-session@testing \
-        php7-pgsql@testing && \
+        php7@community \
+        php7-session@community \
+        php7-pgsql@community && \
     wget https://github.com/vrana/adminer/releases/download/v$ADMINER_VERSION/adminer-$ADMINER_VERSION.php -O /srv/index.php && \
     apk del wget ca-certificates && \
     rm -rf /var/cache/apk/*

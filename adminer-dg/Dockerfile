@@ -1,10 +1,10 @@
-FROM dockette/alpine:3.5
+FROM dockette/alpine:edge
 
 MAINTAINER Milan Sulc <sulcmil@gmail.com>
 
 ENV ADMINER_DG_VERION=1.9.1
 
-RUN echo '@community http://nl.alpinelinux.org/alpine/v3.5/community' >> /etc/apk/repositories && \
+RUN echo '@community http://nl.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories && \
     echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
     apk update && apk upgrade && \
     apk add \
@@ -24,4 +24,4 @@ RUN echo '@community http://nl.alpinelinux.org/alpine/v3.5/community' >> /etc/ap
 WORKDIR srv
 EXPOSE 80
 
-CMD /usr/bin/php7 -S 0.0.0.0:80
+CMD /usr/bin/php -S 0.0.0.0:80

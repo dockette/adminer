@@ -1,10 +1,10 @@
-FROM dockette/alpine:3.5
+FROM dockette/alpine:edge
 
 MAINTAINER Milan Sulc <sulcmil@gmail.com>
 
 ENV ADMINER_VERSION=4.3.1
 
-RUN echo '@community http://nl.alpinelinux.org/alpine/v3.5/community' >> /etc/apk/repositories && \
+RUN echo '@community http://nl.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories && \
     echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
     apk update && apk upgrade && \
     apk add \

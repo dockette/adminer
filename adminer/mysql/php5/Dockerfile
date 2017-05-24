@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM dockette/alpine:3.5
 
 MAINTAINER Milan Sulc <sulcmil@gmail.com>
 
@@ -17,4 +17,4 @@ RUN apk update && apk upgrade && \
 WORKDIR srv
 EXPOSE 80
 
-CMD /usr/bin/php -S 0.0.0.0:80
+CMD /usr/bin/php5 -S 0.0.0.0:80

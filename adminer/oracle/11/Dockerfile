@@ -2,7 +2,7 @@ FROM dockette/sid
 
 MAINTAINER Milan Sulc <sulcmil@gmail.com>
 
-ENV ADMINER_VERSION=4.3.1
+ENV ADMINER_VERSION=4.5.0
 ENV LD_LIBRARY_PATH="/usr/local/lib;/usr/local/instantclient"
 
 RUN apt-get update && \

@@ -2,7 +2,7 @@ FROM dockette/alpine:3.5
 
 MAINTAINER Milan Sulc <sulcmil@gmail.com>
 
-ENV ADMINER_VERSION=4.3.1
+ENV ADMINER_VERSION=4.5.0
 
 RUN apk update && apk upgrade && \
     apk add \

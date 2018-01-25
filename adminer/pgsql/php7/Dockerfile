@@ -2,7 +2,7 @@ FROM dockette/alpine:edge
 
 MAINTAINER Milan Sulc <sulcmil@gmail.com>
 
-ENV ADMINER_VERSION=4.3.1
+ENV ADMINER_VERSION=4.5.0
 
 RUN echo '@community http://nl.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories && \
     echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \

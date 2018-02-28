@@ -3,6 +3,8 @@ FROM dockette/sid
 MAINTAINER Milan Sulc <sulcmil@gmail.com>
 
 ENV ADMINER_VERSION=4.5.0
+ENV MEMORY=256M
+ENV UPLOAD=2048M
 ENV LD_LIBRARY_PATH="/usr/local/lib;/usr/local/instantclient"
 
 RUN apt-get update && \
@@ -43,4 +45,8 @@ RUN apt-get clean -y && \
 WORKDIR srv
 EXPOSE 80
 
-CMD /usr/bin/php -S 0.0.0.0:80
+CMD /usr/bin/php \
+    -d memory_limit=$MEMORY \
+    -d upload_max_filesize=$UPLOAD \
+    -d post_max_size=$UPLOAD \
+    -S 0.0.0.0:80

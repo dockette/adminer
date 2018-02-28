@@ -3,6 +3,8 @@ FROM dockette/alpine:3.5
 MAINTAINER Milan Sulc <sulcmil@gmail.com>
 
 ENV ADMINER_VERSION=4.5.0
+ENV MEMORY=256M
+ENV UPLOAD=2048M
 
 RUN apk update && apk upgrade && \
     apk add \
@@ -17,4 +19,8 @@ RUN apk update && apk upgrade && \
 WORKDIR srv
 EXPOSE 80
 
-CMD /usr/bin/php5 -S 0.0.0.0:80
+CMD /usr/bin/php \
+    -d memory_limit=$MEMORY \
+    -d upload_max_filesize=$UPLOAD \
+    -d post_max_size=$UPLOAD \
+    -S 0.0.0.0:80

@@ -33,6 +33,17 @@ docker run \
     dockette/adminer:full
 ```
 
+By default container is running with `MEMORY=256M` (memory_limit) and `UPLOAD=2048M` (upload_max_filesize, post_max_size). You can override it.
+
+```sh
+docker run \
+    --rm
+    -p 8000:80
+    -e MEMORY=512M
+    -e UPLOAD=4096M
+    dockette/adminer:full
+```
+
 ### Tags
 
 | Image                        | Technologies                          | Size | Docker Hub                                              |

@@ -3,6 +3,8 @@ FROM alpine:edge
 MAINTAINER Milan Sulc <sulcmil@gmail.com>
 
 ENV ADMINER_EDITOR_VERSION=4.5.0
+ENV MEMORY=256M
+ENV UPLOAD=2048M
 
 RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
     apk update && apk upgrade && \
@@ -21,4 +23,8 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
 WORKDIR srv
 EXPOSE 80
 
-CMD /usr/bin/php -S 0.0.0.0:80
+CMD /usr/bin/php \
+    -d memory_limit=$MEMORY \
+    -d upload_max_filesize=$UPLOAD \
+    -d post_max_size=$UPLOAD \
+    -S 0.0.0.0:80

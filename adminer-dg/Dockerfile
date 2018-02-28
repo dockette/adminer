@@ -2,7 +2,9 @@ FROM dockette/alpine:edge
 
 MAINTAINER Milan Sulc <sulcmil@gmail.com>
 
-ENV ADMINER_DG_VERION=1.10.1
+ENV ADMINER_DG_VERION=1.13.0
+ENV MEMORY=256M
+ENV UPLOAD=2048M
 
 RUN echo '@community http://nl.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories && \
     echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
@@ -24,4 +26,8 @@ RUN echo '@community http://nl.alpinelinux.org/alpine/edge/community' >> /etc/ap
 WORKDIR srv
 EXPOSE 80
 
-CMD /usr/bin/php -S 0.0.0.0:80
+CMD /usr/bin/php \
+    -d memory_limit=$MEMORY \
+    -d upload_max_filesize=$UPLOAD \
+    -d post_max_size=$UPLOAD \
+    -S 0.0.0.0:80

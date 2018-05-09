@@ -2,7 +2,7 @@ FROM dockette/alpine:edge
 
 MAINTAINER Milan Sulc <sulcmil@gmail.com>
 
-ENV ADMINER_DG_VERION=1.13.0
+ENV ADMINER_DG_VERION=1.14.0
 ENV MEMORY=256M
 ENV UPLOAD=2048M
 

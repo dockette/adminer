@@ -17,7 +17,7 @@ You should take a look to the official github profile (https://github.com/vrana/
 
 ### Prolog
 
-There are few variants of this adminer image:
+There are few variants of this adminer image, mostly based on Alpine Linux:
 
 - full (mysql, pgsql, sqlite, mongo)
 - mysql (only)

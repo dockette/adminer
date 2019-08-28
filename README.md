@@ -80,3 +80,11 @@ docker run \
 | Image                        | Technologies                          | Size | Docker Hub                                              |
 |------------------------------|---------------------------------------|------|---------------------------------------------------------|
 | dockette/adminer:dg          | MySQL / PostgreSQL / MongoDB / Sqlite | 16mb | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
+
+
+### Repository maintenance
+Upgrade Adminer version to 4.7.X
+
+```bash
+find . -type f -name Dockerfile -exec sed -i '' 's/ENV ADMINER_VERSION=.*/ENV ADMINER_VERSION=4.7.X/g' {} +
+```

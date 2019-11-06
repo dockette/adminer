@@ -16,7 +16,8 @@ RUN echo '@community http://nl.alpinelinux.org/alpine/edge/community' >> /etc/ap
         php7-session@community \
         php7-mysqli@community \
         php7-pgsql@community \
-        php7-json@community && \
+        php7-json@community \
+        php7-mongodb@testing && \
     wget https://github.com/dg/adminer-custom/archive/v$ADMINER_DG_VERION.tar.gz -O /srv/adminer.tgz && \
     tar zxvf /srv/adminer.tgz --strip-components=1 -C /srv && \
     rm /srv/adminer.tgz && \

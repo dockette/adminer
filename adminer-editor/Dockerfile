@@ -17,13 +17,16 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         php7-session@testing \
         php7-mysqli@community \
         php7-pgsql@testing \
-        php7-pecl-mongodb@testing && \
+        php7-pecl-mongodb@testing \
+        dumb-init && \
     wget https://github.com/vrana/adminer/releases/download/v$ADMINER_EDITOR_VERSION/editor-$ADMINER_EDITOR_VERSION.php -O /srv/index.php && \
     apk del wget ca-certificates && \
     rm -rf /var/cache/apk/*
 
 WORKDIR /srv
 EXPOSE 80
+
+ENTRYPOINT ["dumb-init", "--"]
 
 CMD /usr/bin/php \
     -d memory_limit=$MEMORY \

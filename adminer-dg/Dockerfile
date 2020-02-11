@@ -18,7 +18,8 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         php7-mysqli@community \
         php7-pgsql@testing \
         php7-json@testing \
-        php7-pecl-mongodb@testing && \
+        php7-pecl-mongodb@testing \
+        dumb-init && \
     wget https://github.com/dg/adminer-custom/archive/v$ADMINER_DG_VERION.tar.gz -O /srv/adminer.tgz && \
     tar zxvf /srv/adminer.tgz --strip-components=1 -C /srv && \
     rm /srv/adminer.tgz && \
@@ -27,6 +28,8 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
 
 WORKDIR /srv
 EXPOSE 80
+
+ENTRYPOINT ["dumb-init", "--"]
 
 CMD /usr/bin/php \
     -d memory_limit=$MEMORY \

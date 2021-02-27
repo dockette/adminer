@@ -2,7 +2,7 @@ FROM alpine:edge
 
 LABEL maintainer="Milan Sulc <sulcmil@gmail.com>"
 
-ENV ADMINER_DG_VERION=1.21.0
+ENV ADMINER_DG_VERION=1.27.0
 ENV MEMORY=256M
 ENV UPLOAD=2048M
 

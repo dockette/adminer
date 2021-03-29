@@ -79,14 +79,14 @@ docker run \
 
 ### Maintenance
 
-Upgrade Adminer version to 4.7.X.
+Upgrade Adminer version to 4.8.X.
 
 ```bash
-find . -type f -name Dockerfile -exec sed -i '' 's/ENV ADMINER_VERSION=.*/ENV ADMINER_VERSION=4.7.X/g' {} +
+find . -type f -name Dockerfile -exec sed -i '' 's/ENV ADMINER_VERSION=.*/ENV ADMINER_VERSION=4.8.X/g' {} +
 ```
 
-Upgrade Adminer Editor version to 4.7.X.
+Upgrade Adminer Editor version to 4.8.X.
 
 ```bash
-find . -type f -name Dockerfile -exec sed -i '' 's/ENV ADMINER_EDITOR_VERSION=.*/ENV ADMINER_EDITOR_VERSION=4.7.X/g' {} +
+find . -type f -name Dockerfile -exec sed -i '' 's/ENV ADMINER_EDITOR_VERSION=.*/ENV ADMINER_EDITOR_VERSION=4.8.X/g' {} +
 ```

@@ -2,7 +2,7 @@ FROM dockette/debian:buster
 
 LABEL maintainer="Milan Sulc <sulcmil@gmail.com>"
 
-ENV ADMINER_VERSION=4.7.7
+ENV ADMINER_VERSION=4.8.0
 ENV MEMORY=256M
 ENV UPLOAD=2048M
 ENV LD_LIBRARY_PATH="/usr/local/lib;/usr/local/instantclient"

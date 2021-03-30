@@ -32,7 +32,7 @@ RUN wget https://s3.amazonaws.com/simonetti-tests/oci8/instantclient-basic-linux
     unzip /tmp/instantclient-sdk-linux.x64-12.1.0.2.0.zip -d /usr/local/ && \
     ln -s /usr/local/instantclient_12_1 /usr/local/instantclient && \
     ln -s /usr/local/instantclient/libclntsh.so.12.1 /usr/local/instantclient/libclntsh.so && \
-    echo 'instantclient,/usr/local/instantclient' | pecl install oci8 && \
+    echo 'instantclient,/usr/local/instantclient' | pecl install oci8-2.2.0 && \
     echo "extension=oci8.so" > /etc/php/7.3/cli/conf.d/00-oci8.ini
 
 # CLEAN UP #####################################################################

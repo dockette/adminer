@@ -1,4 +1,4 @@
-name: Publish Docker images
+name: Docker
 
 on:
   push:
@@ -33,6 +33,8 @@ jobs:
 
           - dockerfile: ./adminer-postgres/Dockerfile
             tag: postgres
+
+    name: Docker (dockette/adminer:${{ matrix.tag }})
 
     steps:
       - name: Login to DockerHub

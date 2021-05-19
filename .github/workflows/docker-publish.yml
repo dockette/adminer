@@ -7,6 +7,33 @@ on:
 jobs:
   docker:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - dockerfile: ./adminer-dg/Dockerfile
+            tag: dg
+
+          - dockerfile: ./adminer-editor/Dockerfile
+            tag: editor
+
+          - dockerfile: ./adminer-full/Dockerfile
+            tag: full
+
+          - dockerfile: ./adminer-mongo/Dockerfile
+            tag: mongo
+
+          - dockerfile: ./adminer-mysql/Dockerfile
+            tag: mysql
+
+          - dockerfile: ./adminer-oracle-11/Dockerfile
+            tag: oracle-11
+
+          - dockerfile: ./adminer-oracle-12/Dockerfile
+            tag: oracle-12
+
+          - dockerfile: ./adminer-postgres/Dockerfile
+            tag: postgres
+
     steps:
 #      - name: Login to DockerHub
 #        uses: docker/login-action@v1
@@ -23,7 +50,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          file: ./adminer-full/Dockerfile
+          file: ${{ matrix.dockerfile }}
 #          push: true
-          tags: dockette/adminer:full
+          tags: dockette/adminer:${{ matrix.tag }}
           platforms: linux/amd64,linux/arm64

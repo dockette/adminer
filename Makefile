@@ -1,5 +1,6 @@
 .PHONY:
 
+ADMINER_VERSION=4.8.1
 DOCKER_IMAGE=dockette/adminer
 
 build-full:
@@ -25,3 +26,7 @@ build-oracle-12:
 
 build-postgres:
 	docker build -t ${DOCKER_IMAGE}:postgres ./adminer-postgres
+
+update-versions:
+	find . -type f -name Dockerfile -exec sed -i '' 's/ENV ADMINER_VERSION=.*/ENV ADMINER_VERSION=${ADMINER_VERSION}/g' {} +
+	find . -type f -name Dockerfile -exec sed -i '' 's/ENV ADMINER_EDITOR_VERSION=.*/ENV ADMINER_EDITOR_VERSION=${ADMINER_VERSION}/g' {} +

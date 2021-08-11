@@ -34,6 +34,9 @@ jobs:
           - dockerfile: ./adminer-postgres/Dockerfile
             tag: postgres
 
+          - dockerfile: ./adminer-full/Dockerfile
+            tag: latest
+
     name: Docker (dockette/adminer:${{ matrix.tag }})
 
     steps:

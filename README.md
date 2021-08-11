@@ -14,13 +14,19 @@ You should take a look to the official github profile (https://github.com/vrana/
 
 ## Prologue
 
-There are few variants of this adminer image based on Alpine Linux:
+There are few variants of this adminer image based:
 
 - full (mysql, pgsql, sqlite, mongo)
 - mysql (only)
 - pgsql (only)
 - mongo (only)
 - dg (custom)
+
+**Features**
+
+- Alpine Linux (full, editor, df, mongo, mysql, postgres)
+- Debian Buster (oracle-11, oracle-12)
+- PHP 8 (concurrency via PHP cli workers)
 
 ## Usage
 

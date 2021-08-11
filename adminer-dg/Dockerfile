@@ -2,9 +2,11 @@ FROM alpine:edge
 
 LABEL maintainer="Milan Sulc <sulcmil@gmail.com>"
 
-ENV ADMINER_DG_VERION=1.27.0
+ENV ADMINER_DG_VERION=1.18.0
 ENV MEMORY=256M
 ENV UPLOAD=2048M
+ENV WORKERS=4
+ENV PHP_CLI_SERVER_WORKERS=${WORKERS}
 
 RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
     echo '@community http://nl.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories && \
@@ -13,13 +15,13 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
     apk add \
         wget \
         ca-certificates \
-        php7@testing \
-        php7-session@testing \
-        php7-mysqli@community \
-        php7-pgsql@testing \
-        php7-json@testing \
-        php7-pecl-mongodb@testing \
-        dumb-init && \
+        php8@testing \
+        php8-session@testing \
+        php8-mysqli@community \
+        php8-pgsql@testing \
+        php8-json@testing \
+        php8-pecl-mongodb@testing \
+        tini && \
     wget https://github.com/dg/adminer-custom/archive/v$ADMINER_DG_VERION.tar.gz -O /srv/adminer.tgz && \
     tar zxvf /srv/adminer.tgz --strip-components=1 -C /srv && \
     rm /srv/adminer.tgz && \
@@ -29,7 +31,7 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
 WORKDIR /srv
 EXPOSE 80
 
-ENTRYPOINT ["dumb-init", "--"]
+ENTRYPOINT ["/tini", "--"]
 
 CMD /usr/bin/php \
     -d memory_limit=$MEMORY \

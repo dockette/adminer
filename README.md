@@ -20,6 +20,7 @@ There are few variants of this adminer image based on Alpine Linux:
 - mysql (only)
 - pgsql (only)
 - mongo (only)
+- dg (custom)
 
 ## Usage
 
@@ -27,10 +28,14 @@ There are few variants of this adminer image based on Alpine Linux:
 docker run \
     --rm
     -p 8000:80
-    dockette/adminer:full
+    dockette/adminer:dg
 ```
 
-By default container is running with `MEMORY=256M` (memory_limit) and `UPLOAD=2048M` (upload_max_filesize, post_max_size). You can override it.
+By default container is running with these settings, you can override it using environment variables.
+
+- `MEMORY=256M` (memory_limit)
+- `UPLOAD=2048M` (upload_max_filesize, post_max_size)
+- `WORKERS=4` (concurrency)
 
 ```sh
 docker run \
@@ -38,7 +43,7 @@ docker run \
     -p 8000:80
     -e MEMORY=512M
     -e UPLOAD=4096M
-    dockette/adminer:full
+    dockette/adminer:dg
 ```
 
 ## Versions
@@ -50,10 +55,9 @@ docker run \
 | dockette/adminer:mysql       | MySQL                                 | 9mb  | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
 | dockette/adminer:pgsql       | PostgreSQL                            | 8mb  | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
 | dockette/adminer:mongo       | MongoDB                               | 9mb  | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
+| dockette/adminer:dg          | MySQL / PostgreSQL / MongoDB / Sqlite | 16mb | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
 
-## Custom
-
-### Adminer DG
+### `dockette/adminer:dg`
 
 > Customization for the best database management tool written in PHP, Adminer
 
@@ -61,32 +65,10 @@ You should take a look to the official github profile (https://github.com/dg/adm
 
 ![Adminer DG](https://rawgit.com/dockette/adminer/master/.docs/assets/adminer-dg.png)
 
-#### Usage
+## Maintenance
 
-```sh
-docker run \
-    --rm
-    -p 8000:80
-    dockette/adminer:dg
-```
-
-#### Tags
-
-| Image                        | Technologies                          | Size | Docker Hub                                              |
-|------------------------------|---------------------------------------|------|---------------------------------------------------------|
-| dockette/adminer:dg          | MySQL / PostgreSQL / MongoDB / Sqlite | 16mb | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
-
-
-### Maintenance
-
-Upgrade Adminer version to 4.8.X.
+**Upgrade Adminer and Adminer Editor versions to X.Y.Z**
 
 ```bash
-find . -type f -name Dockerfile -exec sed -i '' 's/ENV ADMINER_VERSION=.*/ENV ADMINER_VERSION=4.8.X/g' {} +
-```
-
-Upgrade Adminer Editor version to 4.8.X.
-
-```bash
-find . -type f -name Dockerfile -exec sed -i '' 's/ENV ADMINER_EDITOR_VERSION=.*/ENV ADMINER_EDITOR_VERSION=4.8.X/g' {} +
+ADMINER_VERSION=4.8.1 make update-versions
 ```

@@ -3,6 +3,8 @@
 ADMINER_VERSION=4.8.1
 DOCKER_IMAGE=dockette/adminer
 
+build-all: build-full build-dg build-editor build-mongo build-mysql build-postgres build-oracle-11 build-oracle-12
+
 build-full:
 	docker build -t ${DOCKER_IMAGE}:full ./adminer-full
 

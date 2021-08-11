@@ -10,7 +10,6 @@ ENV WORKERS=4
 ENV PHP_CLI_SERVER_WORKERS=${WORKERS}
 
 # DEPENDENCIES #################################################################
-
 RUN apt-get update && \
     apt-get dist-upgrade -y && \
     apt install -y apt-transport-https lsb-release ca-certificates curl wget && \

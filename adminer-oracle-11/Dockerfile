@@ -50,7 +50,7 @@ RUN apt-get clean -y && \
 WORKDIR /srv
 EXPOSE 80
 
-ENTRYPOINT ["/tini", "--"]
+ENTRYPOINT ["/sbin/tini", "--"]
 
 CMD /usr/bin/php \
     -d memory_limit=$MEMORY \

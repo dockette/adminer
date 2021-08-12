@@ -26,7 +26,7 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
 WORKDIR /srv
 EXPOSE 80
 
-ENTRYPOINT ["/tini", "--"]
+ENTRYPOINT ["/sbin/tini", "--"]
 
 CMD /usr/bin/php \
     -d memory_limit=$MEMORY \

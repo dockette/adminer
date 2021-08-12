@@ -25,6 +25,7 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
     wget https://github.com/dg/adminer-custom/archive/v$ADMINER_DG_VERION.tar.gz -O /srv/adminer.tgz && \
     tar zxvf /srv/adminer.tgz --strip-components=1 -C /srv && \
     rm /srv/adminer.tgz && \
+    ln -s /usr/bin/php8 /usr/bin/php && \
     apk del wget ca-certificates && \
     rm -rf /var/cache/apk/*
 

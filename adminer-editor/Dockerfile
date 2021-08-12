@@ -22,6 +22,7 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         php8-pecl-mongodb@testing \
         tini && \
     wget https://github.com/vrana/adminer/releases/download/v$ADMINER_EDITOR_VERSION/editor-$ADMINER_EDITOR_VERSION.php -O /srv/index.php && \
+    ln -s /usr/bin/php8 /usr/bin/php && \
     apk del wget ca-certificates && \
     rm -rf /var/cache/apk/*
 

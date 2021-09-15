@@ -22,7 +22,7 @@ RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/re
         php8-json@testing \
         php8-pecl-mongodb@testing \
         tini && \
-    wget https://github.com/dg/adminer-custom/archive/v$ADMINER_DG_VERION.tar.gz -O /srv/adminer.tgz && \
+    wget https://github.com/dg/adminer-custom/archive/refs/heads/master.tar.gz -O /srv/adminer.tgz && \
     tar zxvf /srv/adminer.tgz --strip-components=1 -C /srv && \
     rm /srv/adminer.tgz && \
     ln -s /usr/bin/php8 /usr/bin/php && \

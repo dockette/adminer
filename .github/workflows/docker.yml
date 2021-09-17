@@ -2,7 +2,7 @@ name: Docker
 
 on:
   push:
-    branches: master
+    branches: [ master ]
 
 jobs:
   docker:
@@ -12,30 +12,39 @@ jobs:
         include:
           - dockerfile: ./adminer-dg/Dockerfile
             tag: dg
+            platforms: linux/amd64,linux/arm64
 
           - dockerfile: ./adminer-editor/Dockerfile
             tag: editor
+            platforms: linux/amd64,linux/arm64
 
           - dockerfile: ./adminer-full/Dockerfile
             tag: full
+            platforms: linux/amd64,linux/arm64
 
           - dockerfile: ./adminer-mongo/Dockerfile
             tag: mongo
+            platforms: linux/amd64,linux/arm64
 
           - dockerfile: ./adminer-mysql/Dockerfile
             tag: mysql
+            platforms: linux/amd64,linux/arm64
 
           - dockerfile: ./adminer-oracle-11/Dockerfile
             tag: oracle-11
+            platforms: linux/amd64
 
           - dockerfile: ./adminer-oracle-12/Dockerfile
             tag: oracle-12
+            platforms: linux/amd64
 
           - dockerfile: ./adminer-postgres/Dockerfile
             tag: postgres
+            platforms: linux/amd64,linux/arm64
 
           - dockerfile: ./adminer-full/Dockerfile
             tag: latest
+            platforms: linux/amd64,linux/arm64
 
     name: Docker (dockette/adminer:${{ matrix.tag }})
 
@@ -58,4 +67,4 @@ jobs:
           file: ${{ matrix.dockerfile }}
           push: true
           tags: dockette/adminer:${{ matrix.tag }}
-          platforms: linux/amd64,linux/arm64
+          platforms: ${{ matrix.platforms }}

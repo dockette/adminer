@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:3.14
 
 LABEL maintainer="Milan Sulc <sulcmil@gmail.com>"
 
@@ -8,16 +8,15 @@ ENV UPLOAD=2048M
 ENV WORKERS=4
 ENV PHP_CLI_SERVER_WORKERS=${WORKERS}
 
-RUN echo '@testing http://nl.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
-    echo '@community http://nl.alpinelinux.org/alpine/edge/community' >> /etc/apk/repositories && \
+RUN echo '@community http://nl.alpinelinux.org/alpine/v3.14/community' >> /etc/apk/repositories && \
     apk update && \
     apk upgrade && \
     apk add \
         wget \
         ca-certificates \
-        php8@testing \
-        php8-session@testing \
-        php8-pgsql@testing \
+        php8@community \
+        php8-session@community \
+        php8-pgsql@community \
         tini && \
     wget https://github.com/vrana/adminer/releases/download/v$ADMINER_VERSION/adminer-$ADMINER_VERSION.php -O /srv/index.php && \
     ln -s /usr/bin/php8 /usr/bin/php && \

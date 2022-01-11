@@ -1,16 +1,20 @@
-# Adminer / Adminer Editor / Adminer Custom
+<h1 align=center>Dockette / Nexus</h1>
 
-> Database management in a single PHP file.
+<p align=center>
+   🎁 Tiniest boxed dockerized Adminer (MySQL, PostgreSQL, SQLite, Mongo, Oracle) Dockerfiles. Database management in a single PHP file.
+</p>
 
-You should take a look to the official github profile (https://github.com/vrana/adminer).
-
-![Adminer](https://rawgit.com/dockette/adminer/master/.docs/assets/adminer.png)
+<p align=center>
+🕹 <a href="https://f3l1x.io">f3l1x.io</a> | 💻 <a href="https://github.com/f3l1x">f3l1x</a> | 🐦 <a href="https://twitter.com/xf3l1x">@xf3l1x</a>
+</p>
 
 <p align=center>
   <a href="https://hub.docker.com/r/dockette/adminer/"><img src="https://badgen.net/docker/pulls/dockette/adminer"></a>
   <a href="https://bit.ly/ctteg"><img src="https://badgen.net/badge/support/gitter/cyan"></a>
   <a href="https://github.com/sponsors/f3l1x"><img src="https://badgen.net/badge/sponsor/donations/F96854"></a>
 </p>
+
+![Adminer](https://rawgit.com/dockette/adminer/master/.docs/assets/adminer.png)
 
 ------
 

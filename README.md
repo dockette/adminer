@@ -6,11 +6,13 @@ You should take a look to the official github profile (https://github.com/vrana/
 
 ![Adminer](https://rawgit.com/dockette/adminer/master/.docs/assets/adminer.png)
 
-------
+<p align=center>
+  <a href="https://hub.docker.com/r/dockette/adminer/"><img src="https://badgen.net/docker/pulls/dockette/adminer"></a>
+  <a href="https://bit.ly/ctteg"><img src="https://badgen.net/badge/support/gitter/cyan"></a>
+  <a href="https://github.com/sponsors/f3l1x"><img src="https://badgen.net/badge/sponsor/donations/F96854"></a>
+</p>
 
-[![Docker Stars](https://img.shields.io/docker/stars/dockette/adminer.svg?style=flat)](https://hub.docker.com/r/dockette/adminer/)
-[![Docker Pulls](https://img.shields.io/docker/pulls/dockette/adminer.svg?style=flat)](https://hub.docker.com/r/dockette/adminer/)
-[![Join the chat](https://img.shields.io/gitter/room/dockette/dockette.svg?style=flat-square)](https://gitter.im/dockette/dockette?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+------
 
 ## Prologue
 

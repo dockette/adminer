@@ -1,9 +1,10 @@
-FROM alpine:3.14
+FROM alpine:3.15
 
 LABEL maintainer="Milan Sulc <sulcmil@gmail.com>"
 
 ENV ADMINER_VERSION=4.8.1
 ENV MEMORY=256M
+ENV PORT=80
 ENV UPLOAD=2048M
 ENV WORKERS=4
 ENV PHP_CLI_SERVER_WORKERS=${WORKERS}
@@ -24,7 +25,7 @@ RUN echo '@community http://nl.alpinelinux.org/alpine/v3.14/community' >> /etc/a
     rm -rf /var/cache/apk/*
 
 WORKDIR /srv
-EXPOSE 80
+EXPOSE $PORT
 
 ENTRYPOINT ["/sbin/tini", "--"]
 
@@ -32,4 +33,4 @@ CMD /usr/bin/php \
     -d memory_limit=$MEMORY \
     -d upload_max_filesize=$UPLOAD \
     -d post_max_size=$UPLOAD \
-    -S 0.0.0.0:80
+    -S 0.0.0.0:$PORT

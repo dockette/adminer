@@ -26,6 +26,11 @@ RUN echo '@community http://nl.alpinelinux.org/alpine/v3.14/community' >> /etc/a
 WORKDIR /srv
 EXPOSE 80
 
+# Create a non-root user
+RUN addgroup -g 1001 -S nonroot
+RUN adduser -S nonroot -u 1001
+USER nonroot
+
 ENTRYPOINT ["/sbin/tini", "--"]
 
 CMD /usr/bin/php \

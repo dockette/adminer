@@ -1,4 +1,4 @@
-<h1 align=center>Dockette / Nexus</h1>
+<h1 align=center>Dockette / Adminer</h1>
 
 <p align=center>
    🎁 Tiniest boxed dockerized Adminer (MySQL, PostgreSQL, SQLite, Mongo, Oracle) Dockerfiles. Database management in a single PHP file.

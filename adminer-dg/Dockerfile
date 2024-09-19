@@ -12,15 +12,15 @@ RUN echo '@community http://nl.alpinelinux.org/alpine/v3.20/community' >> /etc/a
     apk update && \
     apk upgrade && \
     apk add \
-    wget \
-    ca-certificates \
-    php83@community \
-    php83-session@community \
-    php83-mysqli@community \
-    php83-pgsql@community \
-    php83-json@community \
-    php83-pecl-mongodb@community \
-    tini && \
+        wget \
+        ca-certificates \
+        php83@community \
+        php83-session@community \
+        php83-mysqli@community \
+        php83-pgsql@community \
+        php83-json@community \
+        php83-pecl-mongodb@community \
+        tini && \
     wget https://github.com/dg/adminer-custom/archive/v$ADMINER_DG_VERION.tar.gz -O /srv/adminer.tgz && \
     tar zxvf /srv/adminer.tgz --strip-components=1 -C /srv && \
     rm /srv/adminer.tgz && \

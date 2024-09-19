@@ -14,6 +14,7 @@ RUN echo '@community http://nl.alpinelinux.org/alpine/v3.20/community' >> /etc/a
     apk add \
         wget \
         ca-certificates \
+        php83@community \
         php83-session@community \
         php83-mysqli@community \
         php83-pgsql@community \
@@ -21,7 +22,6 @@ RUN echo '@community http://nl.alpinelinux.org/alpine/v3.20/community' >> /etc/a
         php83-pecl-mongodb@community \
         tini && \
         wget https://github.com/vrana/adminer/releases/download/v$ADMINER_VERSION/adminer-$ADMINER_VERSION.php -O /srv/index.php && \
-    ln -s /usr/bin/php8 /usr/bin/php && \
     apk del wget ca-certificates && \
     rm -rf /var/cache/apk/*
 

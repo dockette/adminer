@@ -1,6 +1,5 @@
 .PHONY:
 
-ADMINER_VERSION=5.1.0
 DOCKER_IMAGE=dockette/adminer
 DOCKER_PLATFORMS=linux/amd64
 

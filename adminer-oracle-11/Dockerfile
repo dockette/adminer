@@ -47,18 +47,11 @@ RUN apt-get clean -y && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/* /var/lib/log/* /tmp/* /var/tmp/*
 
+ADD ./entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 WORKDIR /srv
 EXPOSE 80
 
 ENTRYPOINT ["tini", "--"]
-CMD [\
-    "/usr/bin/php", \
-    "-d", \
-    "memory_limit=${MEMORY}", \
-    "-d", \
-    "upload_max_filesize=${UPLOAD}", \
-    "-d", \
-    "post_max_size=${UPLOAD}", \
-    "-S", \
-    "0.0.0.0:80" \
-    ]
+CMD ["/entrypoint.sh"]

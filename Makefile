@@ -1,33 +1,35 @@
-.PHONY:
-
 DOCKER_IMAGE=dockette/adminer
-DOCKER_PLATFORMS=linux/amd64
+DOCKER_PLATFORMS?=linux/amd64
 
 build-all: build-full build-dg build-editor build-mongo build-mysql build-postgres build-oracle-11 build-oracle-12
 
-build-full:
-	docker buildx build --platform ${DOCKER_PLATFORMS} -t ${DOCKER_IMAGE}:full ./adminer-full
+_docker-build-%: TAG=$*
+_docker-build-%:
+	docker buildx build --platform ${DOCKER_PLATFORMS} -t ${DOCKER_IMAGE}:${TAG} ./adminer-${TAG}
 
-build-dg:
-	docker buildx build --platform ${DOCKER_PLATFORMS} -t ${DOCKER_IMAGE}:dg ./adminer-dg
+build-full: _docker-build-full
+build-dg: _docker-build-dg
+build-editor: _docker-build-editor
+build-mongo: _docker-build-mongo
+build-mysql: _docker-build-mysql
+build-postgres: _docker-build-postgres
+build-oracle-11: _docker-build-oracle-11
+build-oracle-12: _docker-build-oracle-12
 
-build-editor:
-	docker buildx build --platform ${DOCKER_PLATFORMS} -t ${DOCKER_IMAGE}:editor ./adminer-editor
+_docker-test-%: TAG=$*
+_docker-test-%:
+	docker run --rm --platform ${DOCKER_PLATFORMS} ${DOCKER_IMAGE}:${TAG} php --version
 
-build-mongo:
-	docker buildx build --platform ${DOCKER_PLATFORMS} -t ${DOCKER_IMAGE}:mongo ./adminer-mongo
+test-full: _docker-test-full
+test-dg: _docker-test-dg
+test-editor: _docker-test-editor
+test-mongo: _docker-test-mongo
+test-mysql: _docker-test-mysql
+test-postgres: _docker-test-postgres
+test-oracle-11: _docker-test-oracle-11
+test-oracle-12: _docker-test-oracle-12
 
-build-mysql:
-	docker buildx build --platform ${DOCKER_PLATFORMS} -t ${DOCKER_IMAGE}:mysql ./adminer-mysql
-
-build-oracle-11:
-	docker buildx build --platform ${DOCKER_PLATFORMS} -t ${DOCKER_IMAGE}:oracle-11 ./adminer-oracle-11
-
-build-oracle-12:
-	docker buildx build --platform ${DOCKER_PLATFORMS} -t ${DOCKER_IMAGE}:oracle-12 ./adminer-oracle-12
-
-build-postgres:
-	docker buildx build --platform ${DOCKER_PLATFORMS} -t ${DOCKER_IMAGE}:postgres ./adminer-postgres
+test-all: test-full test-dg test-editor test-mongo test-mysql test-postgres test-oracle-11 test-oracle-12
 
 update-versions:
 	find . -type f -name Dockerfile -exec sed -i '' 's/ENV ADMINER_VERSION=.*/ENV ADMINER_VERSION=${ADMINER_VERSION}/g' {} +

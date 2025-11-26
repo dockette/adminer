@@ -1,25 +1,25 @@
-FROM alpine:3.20
+FROM alpine:3.22
 
 LABEL maintainer="Milan Sulc <sulcmil@gmail.com>"
 
-ENV ADMINER_DG_VERION=2.0.0
+ENV ADMINER_DG_VERION=3.3.0
 ENV MEMORY=256M
 ENV UPLOAD=2048M
-ENV WORKERS=4
+ENV WORKERS=8
 ENV PHP_CLI_SERVER_WORKERS=${WORKERS}
 
-RUN echo '@community http://nl.alpinelinux.org/alpine/v3.20/community' >> /etc/apk/repositories && \
+RUN echo '@community http://nl.alpinelinux.org/alpine/v3.22/community' >> /etc/apk/repositories && \
     apk update && \
     apk upgrade && \
     apk add \
         wget \
         ca-certificates \
-        php83@community \
-        php83-session@community \
-        php83-mysqli@community \
-        php83-pgsql@community \
-        php83-json@community \
-        php83-pecl-mongodb@community \
+        php84@community \
+        php84-session@community \
+        php84-mysqli@community \
+        php84-pgsql@community \
+        php84-json@community \
+        php84-pecl-mongodb@community \
         tini && \
     wget https://github.com/dg/adminer-custom/archive/v$ADMINER_DG_VERION.tar.gz -O /srv/adminer.tgz && \
     tar zxvf /srv/adminer.tgz --strip-components=1 -C /srv && \

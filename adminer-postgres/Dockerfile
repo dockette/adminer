@@ -1,4 +1,4 @@
-FROM alpine:3.20
+FROM alpine:3.22
 
 LABEL maintainer="Milan Sulc <sulcmil@gmail.com>"
 
@@ -8,15 +8,15 @@ ENV UPLOAD=2048M
 ENV WORKERS=4
 ENV PHP_CLI_SERVER_WORKERS=${WORKERS}
 
-RUN echo '@community http://nl.alpinelinux.org/alpine/v3.20/community' >> /etc/apk/repositories && \
+RUN echo '@community http://nl.alpinelinux.org/alpine/v3.22/community' >> /etc/apk/repositories && \
     apk update && \
     apk upgrade && \
     apk add \
         wget \
         ca-certificates \
-        php83@community \
-        php83-session@community \
-        php83-pgsql@community \
+        php84@community \
+        php84-session@community \
+        php84-pgsql@community \
         tini && \
     wget https://github.com/vrana/adminer/releases/download/v$ADMINER_VERSION/adminer-$ADMINER_VERSION.php -O /srv/index.php && \
     apk del wget ca-certificates && \

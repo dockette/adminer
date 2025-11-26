@@ -1,4 +1,4 @@
-FROM dockette/debian:bullseye
+FROM dockette/debian:bookworm-slim
 
 LABEL maintainer="Milan Sulc <sulcmil@gmail.com>"
 
@@ -6,7 +6,7 @@ ENV ADMINER_VERSION=5.4.1
 ENV MEMORY=256M
 ENV UPLOAD=2048M
 ENV LD_LIBRARY_PATH="/usr/local/lib;/usr/local/instantclient"
-ENV WORKERS=4
+ENV WORKERS=8
 ENV PHP_CLI_SERVER_WORKERS=${WORKERS}
 
 # DEPENDENCIES #################################################################
@@ -23,9 +23,9 @@ RUN apt-get update && \
         unzip \
         libaio1 \
         ca-certificates \
-        php8.3 \
-        php8.3-dev \
-        php8.3-xml \
+        php8.4 \
+        php8.4-dev \
+        php8.4-xml \
         php-pear \
         tini && \
     wget https://github.com/vrana/adminer/releases/download/v$ADMINER_VERSION/adminer-$ADMINER_VERSION.php -O /srv/index.php
@@ -38,7 +38,7 @@ RUN wget https://github.com/f00b4r/oracle-instantclient/raw/master/instantclient
     ln -s /usr/local/instantclient_12_1 /usr/local/instantclient && \
     ln -s /usr/local/instantclient/libclntsh.so.12.1 /usr/local/instantclient/libclntsh.so && \
     echo 'instantclient,/usr/local/instantclient' | pecl install oci8 && \
-    echo "extension=oci8.so" > /etc/php/8.3/cli/conf.d/00-oci8.ini
+    echo "extension=oci8.so" > /etc/php/8.4/cli/conf.d/00-oci8.ini
 
 # CLEAN UP #####################################################################
 RUN apt-get clean -y && \
@@ -50,7 +50,7 @@ RUN apt-get clean -y && \
 WORKDIR /srv
 EXPOSE 80
 
-ENTRYPOINT ["/sbin/tini", "--"]
+ENTRYPOINT ["tini", "--"]
 CMD [\
     "/usr/bin/php", \
     "-d", \

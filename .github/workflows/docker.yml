@@ -1,8 +1,13 @@
-name: Docker
+name: "Docker"
 
 on:
+  workflow_dispatch:
+
   push:
-    branches: [ master ]
+    branches: ["master"]
+
+  schedule:
+    - cron: "0 8 * * 1"
 
 jobs:
   docker:

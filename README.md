@@ -79,6 +79,8 @@ You should take a look to the official github profile (https://github.com/dg/adm
 
 ## Maintenance
 
+
+See [how to contribute](https://github.com/dockette/.github/blob/master/CONTRIBUTING.md) to this package.
 **Upgrade Adminer and Adminer Editor versions to X.Y.Z**
 
 ```bash

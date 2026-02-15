@@ -1,9 +1,3 @@
-<h1 align=center>Dockette / Adminer</h1>
-
-<p align=center>
-   🎁 Tiniest boxed dockerized Adminer (MySQL, PostgreSQL, SQLite, Mongo, Oracle) Dockerfiles. Database management in a single PHP file.
-</p>
-
 <p align=center>
 🕹 <a href="https://f3l1x.io">f3l1x.io</a> | 💻 <a href="https://github.com/f3l1x">f3l1x</a> | 🐦 <a href="https://twitter.com/xf3l1x">@xf3l1x</a>
 </p>

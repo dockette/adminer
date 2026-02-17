@@ -22,16 +22,17 @@ echo "[adminer] Loading Adminer (MySQL)..."
 # Set default values if not provided
 MEMORY=${MEMORY:-256M}
 UPLOAD=${UPLOAD:-2048M}
+PORT=${PORT:-80}
 
-echo "[adminer] Starting PHP server (http://0.0.0.0:80 in Docker):"
+echo "[adminer] Starting PHP server (http://0.0.0.0:${PORT} in Docker):"
 echo "-> memory_limit=${MEMORY}"
 echo "-> upload_max_filesize=${UPLOAD}"
 echo "-> post_max_size=${UPLOAD}"
+echo "-> port=${PORT}"
 
 # Execute PHP server
 exec php \
     -d "memory_limit=${MEMORY}" \
     -d "upload_max_filesize=${UPLOAD}" \
     -d "post_max_size=${UPLOAD}" \
-    -S 0.0.0.0:80
-
+    -S "0.0.0.0:${PORT}"

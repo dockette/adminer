@@ -5,6 +5,7 @@ LABEL maintainer="Milan Sulc <sulcmil@gmail.com>"
 ENV ADMINER_VERSION=5.4.2
 ENV MEMORY=256M
 ENV UPLOAD=2048M
+ENV PORT=80
 ENV LD_LIBRARY_PATH="/usr/local/lib;/usr/local/instantclient"
 ENV WORKERS=8
 ENV PHP_CLI_SERVER_WORKERS=${WORKERS}

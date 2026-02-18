@@ -51,6 +51,11 @@ jobs:
             tag: oracle-12
             platforms: linux/amd64
 
+          - dockerfile: ./adminer-oracle-19/Dockerfile
+            context: ./adminer-oracle-19
+            tag: oracle-19
+            platforms: linux/amd64
+
           - dockerfile: ./adminer-postgres/Dockerfile
             context: ./adminer-postgres
             tag: postgres

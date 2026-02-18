@@ -47,14 +47,16 @@ By default container is running with these settings, you can override it using e
 
 - `MEMORY=256M` (memory_limit)
 - `UPLOAD=2048M` (upload_max_filesize, post_max_size)
+- `PORT=80` (PHP server listening port)
 - `WORKERS=4` (concurrency)
 
 ```sh
 docker run \
     --rm
-    -p 8000:80
+    -p 8000:8080
     -e MEMORY=512M
     -e UPLOAD=4096M
+    -e PORT=8080
     dockette/adminer:dg
 ```
 

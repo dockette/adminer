@@ -37,7 +37,7 @@ RUN wget https://download.oracle.com/otn_software/linux/instantclient/1930000/in
     unzip -o /tmp/instantclient-basic-linux.x64-19.30.0.0.0dbru.zip -d /usr/local/ && \
     unzip -o /tmp/instantclient-sdk-linux.x64-19.30.0.0.0dbru.zip -d /usr/local/ && \
     ln -s /usr/local/instantclient_19_30 /usr/local/instantclient && \
-    ln -s /usr/local/instantclient/libclntsh.so.19.1 /usr/local/instantclient/libclntsh.so && \
+    ln -sf /usr/local/instantclient/libclntsh.so.19.1 /usr/local/instantclient/libclntsh.so && \
     echo 'instantclient,/usr/local/instantclient' | pecl install oci8 && \
     echo "extension=oci8.so" > /etc/php/8.4/cli/conf.d/00-oci8.ini
 

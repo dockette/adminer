@@ -26,12 +26,13 @@ There are few variants of this adminer image based:
 - mysql (only)
 - pgsql (only)
 - mongo (only)
+- oracle-11 / oracle-12 / oracle-19 (only)
 - dg (custom)
 
 **Features**
 
 - Alpine Linux (full, editor, df, mongo, mysql, postgres)
-- Debian Buster (oracle-11, oracle-12)
+- Debian Buster (oracle-11, oracle-12, oracle-19)
 - PHP 8 (concurrency via PHP cli workers)
 
 ## Usage

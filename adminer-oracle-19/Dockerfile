@@ -34,8 +34,8 @@ RUN apt-get update && \
 # OCI8 (ORACLE) ################################################################
 RUN wget https://download.oracle.com/otn_software/linux/instantclient/1930000/instantclient-basic-linux.x64-19.30.0.0.0dbru.zip -O /tmp/instantclient-basic-linux.x64-19.30.0.0.0dbru.zip && \
     wget https://download.oracle.com/otn_software/linux/instantclient/1930000/instantclient-sdk-linux.x64-19.30.0.0.0dbru.zip -O /tmp/instantclient-sdk-linux.x64-19.30.0.0.0dbru.zip && \
-    unzip /tmp/instantclient-basic-linux.x64-19.30.0.0.0dbru.zip -d /usr/local/ && \
-    unzip /tmp/instantclient-sdk-linux.x64-19.30.0.0.0dbru.zip -d /usr/local/ && \
+    unzip -o /tmp/instantclient-basic-linux.x64-19.30.0.0.0dbru.zip -d /usr/local/ && \
+    unzip -o /tmp/instantclient-sdk-linux.x64-19.30.0.0.0dbru.zip -d /usr/local/ && \
     ln -s /usr/local/instantclient_19_30 /usr/local/instantclient && \
     ln -s /usr/local/instantclient/libclntsh.so.19.1 /usr/local/instantclient/libclntsh.so && \
     echo 'instantclient,/usr/local/instantclient' | pecl install oci8 && \

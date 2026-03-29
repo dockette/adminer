@@ -14,7 +14,7 @@
   <a href="https://github.com/sponsors/f3l1x"><img src="https://badgen.net/badge/sponsor/donations/F96854"></a>
 </p>
 
-![Adminer](https://rawgit.com/dockette/adminer/master/.docs/assets/adminer.png)
+![Adminer](.docs/assets/adminer.png)
 
 ------
 
@@ -75,7 +75,7 @@ docker run \
 
 You should take a look to the official github profile (https://github.com/dg/adminer-custom).
 
-![Adminer DG](https://rawgit.com/dockette/adminer/master/.docs/assets/adminer-dg.png)
+![Adminer DG](.docs/assets/adminer-dg.png)
 
 ## Themes
 
@@ -93,35 +93,50 @@ If the specified theme is not found, the container will list all available theme
 
 ### Available Themes
 
-| Theme | Preview |
-|-------|---------|
-| default (no theme) | ![default](.docs/assets/themes/default.png) |
-| `adminer-dark` | ![adminer-dark](.docs/assets/themes/adminer-dark.png) |
-| `brade` | ![brade](.docs/assets/themes/brade.png) |
-| `bueltge` | ![bueltge](.docs/assets/themes/bueltge.png) |
-| `dracula` | ![dracula](.docs/assets/themes/dracula.png) |
-| `esterka` | ![esterka](.docs/assets/themes/esterka.png) |
-| `flat` | ![flat](.docs/assets/themes/flat.png) |
-| `galkaev` | ![galkaev](.docs/assets/themes/galkaev.png) |
-| `haeckel` | ![haeckel](.docs/assets/themes/haeckel.png) |
-| `hever` | ![hever](.docs/assets/themes/hever.png) |
-| `konya` | ![konya](.docs/assets/themes/konya.png) |
-| `lavender-light` | ![lavender-light](.docs/assets/themes/lavender-light.png) |
-| `lucas-sandery` | ![lucas-sandery](.docs/assets/themes/lucas-sandery.png) |
-| `mancave` | ![mancave](.docs/assets/themes/mancave.png) |
-| `mvt` | ![mvt](.docs/assets/themes/mvt.png) |
-| `nette` | ![nette](.docs/assets/themes/nette.png) |
-| `ng9` | ![ng9](.docs/assets/themes/ng9.png) |
-| `nicu` | ![nicu](.docs/assets/themes/nicu.png) |
-| `pappu687` | ![pappu687](.docs/assets/themes/pappu687.png) |
-| `paranoiq` | ![paranoiq](.docs/assets/themes/paranoiq.png) |
-| `pepa-linha` | ![pepa-linha](.docs/assets/themes/pepa-linha.png) |
-| `pokorny` | ![pokorny](.docs/assets/themes/pokorny.png) |
-| `price` | ![price](.docs/assets/themes/price.png) |
-| `rmsoft` | ![rmsoft](.docs/assets/themes/rmsoft.png) |
-| `rmsoft_blue` | ![rmsoft_blue](.docs/assets/themes/rmsoft_blue.png) |
-| `rmsoft_blue-dark` | ![rmsoft_blue-dark](.docs/assets/themes/rmsoft_blue-dark.png) |
-| `win98` | ![win98](.docs/assets/themes/win98.png) |
+<table>
+<tr>
+<td align="center"><strong>default</strong><br><img src=".docs/assets/themes/default.png" width="200"></td>
+<td align="center"><strong>adminer-dark</strong><br><img src=".docs/assets/themes/adminer-dark.png" width="200"></td>
+<td align="center"><strong>brade</strong><br><img src=".docs/assets/themes/brade.png" width="200"></td>
+<td align="center"><strong>bueltge</strong><br><img src=".docs/assets/themes/bueltge.png" width="200"></td>
+<td align="center"><strong>dracula</strong><br><img src=".docs/assets/themes/dracula.png" width="200"></td>
+</tr>
+<tr>
+<td align="center"><strong>esterka</strong><br><img src=".docs/assets/themes/esterka.png" width="200"></td>
+<td align="center"><strong>flat</strong><br><img src=".docs/assets/themes/flat.png" width="200"></td>
+<td align="center"><strong>galkaev</strong><br><img src=".docs/assets/themes/galkaev.png" width="200"></td>
+<td align="center"><strong>haeckel</strong><br><img src=".docs/assets/themes/haeckel.png" width="200"></td>
+<td align="center"><strong>hever</strong><br><img src=".docs/assets/themes/hever.png" width="200"></td>
+</tr>
+<tr>
+<td align="center"><strong>konya</strong><br><img src=".docs/assets/themes/konya.png" width="200"></td>
+<td align="center"><strong>lavender-light</strong><br><img src=".docs/assets/themes/lavender-light.png" width="200"></td>
+<td align="center"><strong>lucas-sandery</strong><br><img src=".docs/assets/themes/lucas-sandery.png" width="200"></td>
+<td align="center"><strong>mancave</strong><br><img src=".docs/assets/themes/mancave.png" width="200"></td>
+<td align="center"><strong>mvt</strong><br><img src=".docs/assets/themes/mvt.png" width="200"></td>
+</tr>
+<tr>
+<td align="center"><strong>nette</strong><br><img src=".docs/assets/themes/nette.png" width="200"></td>
+<td align="center"><strong>ng9</strong><br><img src=".docs/assets/themes/ng9.png" width="200"></td>
+<td align="center"><strong>nicu</strong><br><img src=".docs/assets/themes/nicu.png" width="200"></td>
+<td align="center"><strong>pappu687</strong><br><img src=".docs/assets/themes/pappu687.png" width="200"></td>
+<td align="center"><strong>paranoiq</strong><br><img src=".docs/assets/themes/paranoiq.png" width="200"></td>
+</tr>
+<tr>
+<td align="center"><strong>pepa-linha</strong><br><img src=".docs/assets/themes/pepa-linha.png" width="200"></td>
+<td align="center"><strong>pokorny</strong><br><img src=".docs/assets/themes/pokorny.png" width="200"></td>
+<td align="center"><strong>price</strong><br><img src=".docs/assets/themes/price.png" width="200"></td>
+<td align="center"><strong>rmsoft</strong><br><img src=".docs/assets/themes/rmsoft.png" width="200"></td>
+<td align="center"><strong>rmsoft_blue</strong><br><img src=".docs/assets/themes/rmsoft_blue.png" width="200"></td>
+</tr>
+<tr>
+<td align="center"><strong>rmsoft_blue-dark</strong><br><img src=".docs/assets/themes/rmsoft_blue-dark.png" width="200"></td>
+<td align="center"><strong>win98</strong><br><img src=".docs/assets/themes/win98.png" width="200"></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
 
 ## Maintenance
 

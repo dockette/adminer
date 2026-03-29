@@ -30,6 +30,8 @@ RUN echo '@community http://nl.alpinelinux.org/alpine/v3.22/community' >> /etc/a
     unzip /tmp/adminer-$ADMINER_VERSION.zip -d /tmp && \
     mkdir -p /srv/plugins && \
     mv /tmp/adminer-$ADMINER_VERSION/plugins/* /srv/plugins/ 2>/dev/null || true && \
+    mkdir -p /srv/designs && \
+    mv /tmp/adminer-$ADMINER_VERSION/designs/* /srv/designs/ 2>/dev/null || true && \
     rm -rf /tmp/* && \
     mkdir -p /srv/adminer-plugins && \
     ln -s /usr/bin/php84 /usr/bin/php && \

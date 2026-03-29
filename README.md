@@ -77,6 +77,52 @@ You should take a look to the official github profile (https://github.com/dg/adm
 
 ![Adminer DG](https://rawgit.com/dockette/adminer/master/.docs/assets/adminer-dg.png)
 
+## Themes
+
+You can apply a theme by setting the `ADMINER_THEME` environment variable:
+
+```sh
+docker run \
+    --rm
+    -p 8000:80
+    -e ADMINER_THEME=dracula
+    dockette/adminer:full
+```
+
+If the specified theme is not found, the container will list all available themes.
+
+### Available Themes
+
+| Theme | Preview |
+|-------|---------|
+| default (no theme) | ![default](.docs/assets/themes/default.png) |
+| `adminer-dark` | ![adminer-dark](.docs/assets/themes/adminer-dark.png) |
+| `brade` | ![brade](.docs/assets/themes/brade.png) |
+| `bueltge` | ![bueltge](.docs/assets/themes/bueltge.png) |
+| `dracula` | ![dracula](.docs/assets/themes/dracula.png) |
+| `esterka` | ![esterka](.docs/assets/themes/esterka.png) |
+| `flat` | ![flat](.docs/assets/themes/flat.png) |
+| `galkaev` | ![galkaev](.docs/assets/themes/galkaev.png) |
+| `haeckel` | ![haeckel](.docs/assets/themes/haeckel.png) |
+| `hever` | ![hever](.docs/assets/themes/hever.png) |
+| `konya` | ![konya](.docs/assets/themes/konya.png) |
+| `lavender-light` | ![lavender-light](.docs/assets/themes/lavender-light.png) |
+| `lucas-sandery` | ![lucas-sandery](.docs/assets/themes/lucas-sandery.png) |
+| `mancave` | ![mancave](.docs/assets/themes/mancave.png) |
+| `mvt` | ![mvt](.docs/assets/themes/mvt.png) |
+| `nette` | ![nette](.docs/assets/themes/nette.png) |
+| `ng9` | ![ng9](.docs/assets/themes/ng9.png) |
+| `nicu` | ![nicu](.docs/assets/themes/nicu.png) |
+| `pappu687` | ![pappu687](.docs/assets/themes/pappu687.png) |
+| `paranoiq` | ![paranoiq](.docs/assets/themes/paranoiq.png) |
+| `pepa-linha` | ![pepa-linha](.docs/assets/themes/pepa-linha.png) |
+| `pokorny` | ![pokorny](.docs/assets/themes/pokorny.png) |
+| `price` | ![price](.docs/assets/themes/price.png) |
+| `rmsoft` | ![rmsoft](.docs/assets/themes/rmsoft.png) |
+| `rmsoft_blue` | ![rmsoft_blue](.docs/assets/themes/rmsoft_blue.png) |
+| `rmsoft_blue-dark` | ![rmsoft_blue-dark](.docs/assets/themes/rmsoft_blue-dark.png) |
+| `win98` | ![win98](.docs/assets/themes/win98.png) |
+
 ## Maintenance
 
 **Upgrade Adminer and Adminer Editor versions to X.Y.Z**

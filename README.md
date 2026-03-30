@@ -141,10 +141,14 @@ If the specified theme is not found, the container will list all available theme
 </tr>
 </table>
 
-## Maintenance
+## Upgrade
 
 **Upgrade Adminer and Adminer Editor versions to X.Y.Z**
 
 ```bash
 ADMINER_VERSION=4.8.1 make update-versions
 ```
+
+## Maintenance
+
+See [how to contribute](https://github.com/dockette/.github/blob/master/CONTRIBUTING.md) to this package.

@@ -29,7 +29,12 @@ RUN apt-get update && \
         php8.4-xml \
         php-pear \
         tini && \
-    wget https://github.com/vrana/adminer/releases/download/v$ADMINER_VERSION/adminer-$ADMINER_VERSION.php -O /srv/index.php
+    wget https://github.com/vrana/adminer/releases/download/v$ADMINER_VERSION/adminer-$ADMINER_VERSION.php -O /srv/index.php && \
+    wget https://github.com/vrana/adminer/releases/download/v$ADMINER_VERSION/adminer-$ADMINER_VERSION.zip -O /tmp/adminer-$ADMINER_VERSION.zip && \
+    unzip /tmp/adminer-$ADMINER_VERSION.zip -d /tmp && \
+    mkdir -p /srv/designs && \
+    mv /tmp/adminer-$ADMINER_VERSION/designs/* /srv/designs/ 2>/dev/null || true && \
+    rm -rf /tmp/*
 
 # OCI8 (ORACLE) ################################################################
 RUN wget https://download.oracle.com/otn_software/linux/instantclient/1930000/instantclient-basic-linux.x64-19.30.0.0.0dbru.zip -O /tmp/instantclient-basic-linux.x64-19.30.0.0.0dbru.zip && \

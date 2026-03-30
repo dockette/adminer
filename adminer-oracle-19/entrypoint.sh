@@ -19,6 +19,27 @@ fi
 
 echo "[adminer] Loading Adminer (Oracle 19)..."
 
+# Copy theme CSS files based on ADMINER_THEME environment variable
+if [ -n "${ADMINER_THEME}" ]; then
+    THEME_DIR="/srv/designs/${ADMINER_THEME}"
+    if [ -d "${THEME_DIR}" ]; then
+        if [ -f "${THEME_DIR}/adminer.css" ]; then
+            cp "${THEME_DIR}/adminer.css" /srv/adminer.css
+            echo "[adminer] Theme '${ADMINER_THEME}' applied successfully."
+        else
+            echo "[adminer] Warning: Theme '${ADMINER_THEME}' does not contain adminer.css"
+        fi
+        if [ -f "${THEME_DIR}/adminer-dark.css" ]; then
+            cp "${THEME_DIR}/adminer-dark.css" /srv/adminer-dark.css
+            echo "[adminer] Dark mode CSS for theme '${ADMINER_THEME}' applied."
+        fi
+    else
+        echo "[adminer] Warning: Theme '${ADMINER_THEME}' not found in /srv/designs/"
+        echo "[adminer] Available themes:"
+        ls -1 /srv/designs/ 2>/dev/null || echo "[adminer] No themes available."
+    fi
+fi
+
 # Set default values if not provided
 MEMORY=${MEMORY:-256M}
 UPLOAD=${UPLOAD:-2048M}

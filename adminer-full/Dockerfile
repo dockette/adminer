@@ -38,7 +38,8 @@ RUN echo '@community http://nl.alpinelinux.org/alpine/v3.22/community' >> /etc/a
     apk del wget unzip ca-certificates && \
     rm -rf /var/cache/apk/*
 
-ADD ./entrypoint.sh /entrypoint.sh
+ADD ./adminer-full/entrypoint.sh /entrypoint.sh
+ADD ./.plugins/ /srv/plugins-available/
 RUN chmod +x /entrypoint.sh
 
 WORKDIR /srv

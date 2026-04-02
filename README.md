@@ -80,6 +80,56 @@ You should take a look to the official github profile (https://github.com/dg/adm
 
 ![Adminer DG](.docs/assets/adminer-dg.png)
 
+## Plugins
+
+Adminer plugins can be enabled via environment variables. All plugins are disabled by default. Available for all image variants except `dg`.
+
+### Autologin
+
+Skips the login form and connects directly to a database server.
+
+| Variable | Description |
+|---|---|
+| `ADMINER_PLUGIN_AUTOLOGIN=1` | Enable the autologin plugin |
+| `ADMINER_AUTOLOGIN_SERVER` | DSN connection string |
+
+DSN format: `driver://username:password@host:port/database`
+
+```sh
+docker run \
+    --rm \
+    -p 8080:80 \
+    -e ADMINER_PLUGIN_AUTOLOGIN=1 \
+    -e ADMINER_AUTOLOGIN_SERVER=server://root:secret@mysql:3306/mydb \
+    dockette/adminer:full
+```
+
+Supported drivers: `server` (MySQL/MariaDB), `pgsql`, `sqlite`, `mongo`, `oracle`, `elastic`.
+
+### Server List
+
+Displays a dropdown of pre-configured database servers with an **Auto Sign-In** button. Credentials are handled server-side and never exposed to the browser.
+
+| Variable | Description |
+|---|---|
+| `ADMINER_PLUGIN_SERVER_LIST=1` | Enable the server list plugin |
+| `ADMINER_SERVERS_<Name>` | DSN for each server (suffix becomes the display name) |
+
+```sh
+docker run \
+    --rm \
+    -p 8080:80 \
+    -e ADMINER_PLUGIN_SERVER_LIST=1 \
+    -e ADMINER_SERVERS_MySQL=server://root:secret@mysql:3306/mydb \
+    -e ADMINER_SERVERS_PostgreSQL=pgsql://postgres:pwd@pg:5432/app \
+    -e ADMINER_SERVERS_DevDB=server://dev@devhost:3306 \
+    dockette/adminer:full
+```
+
+Servers without credentials in the DSN (e.g. `server://devhost:3306`) appear in the dropdown but require manual login. The **Auto Sign-In** button only appears for servers with stored credentials.
+
+> **Note:** Autologin takes precedence over Server List. If both plugins are enabled, only Autologin is activated.
+
 ## Themes
 
 You can apply a theme by setting the `ADMINER_THEME` environment variable:

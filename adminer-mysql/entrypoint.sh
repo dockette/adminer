@@ -40,6 +40,15 @@ if [ -n "${ADMINER_THEME}" ]; then
     fi
 fi
 
+# Activate plugins (ADMINER_PLUGIN_<name>=1, all disabled by default)
+if [ "${ADMINER_PLUGIN_AUTOLOGIN}" = "1" ]; then
+    cp /srv/plugins-available/adminer-autologin.php /srv/adminer-plugins/
+    echo "[adminer] Plugin 'autologin' activated."
+elif [ "${ADMINER_PLUGIN_SERVER_LIST}" = "1" ]; then
+    cp /srv/plugins-available/adminer-server-list.php /srv/adminer-plugins/
+    echo "[adminer] Plugin 'server-list' activated."
+fi
+
 # Set default values if not provided
 MEMORY=${MEMORY:-256M}
 UPLOAD=${UPLOAD:-2048M}

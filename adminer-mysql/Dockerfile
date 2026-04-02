@@ -27,11 +27,13 @@ RUN echo '@community http://nl.alpinelinux.org/alpine/v3.22/community' >> /etc/a
     mkdir -p /srv/designs && \
     mv /tmp/adminer-$ADMINER_VERSION/designs/* /srv/designs/ 2>/dev/null || true && \
     rm -rf /tmp/* && \
+    mkdir -p /srv/adminer-plugins && \
     ln -s /usr/bin/php84 /usr/bin/php && \
     apk del wget unzip ca-certificates && \
     rm -rf /var/cache/apk/*
 
-ADD ./entrypoint.sh /entrypoint.sh
+ADD ./adminer-mysql/entrypoint.sh /entrypoint.sh
+ADD ./.plugins/ /srv/plugins-available/
 RUN chmod +x /entrypoint.sh
 
 WORKDIR /srv

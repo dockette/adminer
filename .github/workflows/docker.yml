@@ -21,52 +21,52 @@ jobs:
       matrix:
         include:
           - dockerfile: ./adminer-dg/Dockerfile
-            context: ./adminer-dg
+            context: .
             tag: dg
             platforms: linux/amd64,linux/arm64
 
           - dockerfile: ./adminer-editor/Dockerfile
-            context: ./adminer-editor
+            context: .
             tag: editor
             platforms: linux/amd64,linux/arm64
 
           - dockerfile: ./adminer-full/Dockerfile
-            context: ./adminer-full
+            context: .
             tag: full
             platforms: linux/amd64,linux/arm64
 
           - dockerfile: ./adminer-mongo/Dockerfile
-            context: ./adminer-mongo
+            context: .
             tag: mongo
             platforms: linux/amd64,linux/arm64
 
           - dockerfile: ./adminer-mysql/Dockerfile
-            context: ./adminer-mysql
+            context: .
             tag: mysql
             platforms: linux/amd64,linux/arm64
 
           - dockerfile: ./adminer-oracle-11/Dockerfile
-            context: ./adminer-oracle-11
+            context: .
             tag: oracle-11
             platforms: linux/amd64
 
           - dockerfile: ./adminer-oracle-12/Dockerfile
-            context: ./adminer-oracle-12
+            context: .
             tag: oracle-12
             platforms: linux/amd64
 
           - dockerfile: ./adminer-oracle-19/Dockerfile
-            context: ./adminer-oracle-19
+            context: .
             tag: oracle-19
             platforms: linux/amd64
 
           - dockerfile: ./adminer-postgres/Dockerfile
-            context: ./adminer-postgres
+            context: .
             tag: postgres
             platforms: linux/amd64,linux/arm64
 
           - dockerfile: ./adminer-full/Dockerfile
-            context: ./adminer-full
+            context: .
             tag: latest
             platforms: linux/amd64,linux/arm64
 

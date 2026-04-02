@@ -51,9 +51,11 @@ RUN apt-get clean -y && \
     apt-get autoclean -y && \
     apt-get remove -y wget && \
     apt-get autoremove -y && \
-    rm -rf /var/lib/apt/lists/* /var/lib/log/* /tmp/* /var/tmp/*
+    rm -rf /var/lib/apt/lists/* /var/lib/log/* /tmp/* /var/tmp/* && \
+    mkdir -p /srv/adminer-plugins
 
-ADD ./entrypoint.sh /entrypoint.sh
+ADD ./adminer-oracle-19/entrypoint.sh /entrypoint.sh
+ADD ./.plugins/ /srv/plugins-available/
 RUN chmod +x /entrypoint.sh
 
 WORKDIR /srv

@@ -5,7 +5,7 @@ build-all: build-full build-dg build-editor build-mongo build-mysql build-postgr
 
 _docker-build-%: TAG=$*
 _docker-build-%:
-	docker buildx build --platform ${DOCKER_PLATFORMS} -t ${DOCKER_IMAGE}:${TAG} ./adminer-${TAG}
+	docker buildx build --platform ${DOCKER_PLATFORMS} -t ${DOCKER_IMAGE}:${TAG} -f ./adminer-${TAG}/Dockerfile .
 
 build-full: _docker-build-full
 build-dg: _docker-build-dg

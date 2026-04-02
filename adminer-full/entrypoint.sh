@@ -27,6 +27,15 @@ else
     echo "[adminer] No driver plugins directory found at /srv/plugins/drivers, skipping..."
 fi
 
+# Activate plugins (ADMINER_PLUGIN_<name>=1, all disabled by default)
+if [ "${ADMINER_PLUGIN_AUTOLOGIN}" = "1" ]; then
+    cp /srv/plugins-available/adminer-autologin.php /srv/adminer-plugins/
+    echo "[adminer] Plugin 'autologin' activated."
+elif [ "${ADMINER_PLUGIN_SERVER_LIST}" = "1" ]; then
+    cp /srv/plugins-available/adminer-server-list.php /srv/adminer-plugins/
+    echo "[adminer] Plugin 'server-list' activated."
+fi
+
 # Copy theme CSS files based on ADMINER_THEME environment variable
 if [ -n "${ADMINER_THEME}" ]; then
     THEME_DIR="/srv/designs/${ADMINER_THEME}"

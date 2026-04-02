@@ -1,0 +1,43 @@
+services:
+  adminer:
+    build:
+      context: .
+      dockerfile: adminer-full/Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      # Plugin: server-list (dropdown with Auto Sign-In button)
+      ADMINER_PLUGIN_SERVER_LIST: "1"
+      ADMINER_SERVERS_MariaDB: "server://root:root@mariadb:3306/testdb"
+      ADMINER_SERVERS_PostgreSQL: "pgsql://root:root@postgres:5432/testdb"
+      # Plugin: autologin (skips login form, takes precedence)
+      #ADMINER_PLUGIN_AUTOLOGIN: "1"
+      #ADMINER_AUTOLOGIN_SERVER: "server://root:root@mariadb:3306/testdb"
+    depends_on:
+      mariadb:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+
+  mariadb:
+    image: mariadb:11
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: testdb
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: testdb
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d testdb"]
+      interval: 5s
+      timeout: 3s
+      retries: 10

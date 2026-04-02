@@ -1,7 +1,7 @@
 <h1 align=center>Dockette / Adminer</h1>
 
 <p align=center>
-   🎁 Tiniest boxed dockerized Adminer (MySQL, PostgreSQL, SQLite, Mongo, Oracle) Dockerfiles. Database management in a single PHP file.
+   🎁 Tiniest boxed dockerized Adminer (MySQL, PostgreSQL, SQLite, Mongo, Oracle, MSSQL) Dockerfiles. Database management in a single PHP file.
 </p>
 
 <p align=center>
@@ -26,13 +26,14 @@ There are few variants of this adminer image based:
 - mysql (only)
 - pgsql (only)
 - mongo (only)
+- mssql (only)
 - oracle-11 / oracle-12 / oracle-19 (only)
 - dg (custom)
 
 **Features**
 
-- Alpine Linux (full, editor, df, mongo, mysql, postgres)
-- Debian Buster (oracle-11, oracle-12, oracle-19)
+- Alpine Linux (full, editor, dg, mongo, mysql, postgres)
+- Debian Bookworm (mssql, oracle-11, oracle-12, oracle-19)
 - PHP 8 (concurrency via PHP cli workers)
 
 ## Usage
@@ -70,7 +71,27 @@ docker run \
 | dockette/adminer:mysql       | MySQL                                 | 9mb  | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
 | dockette/adminer:pgsql       | PostgreSQL                            | 8mb  | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
 | dockette/adminer:mongo       | MongoDB                               | 9mb  | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
+| dockette/adminer:mssql       | MS SQL Server                         | -    | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
 | dockette/adminer:dg          | MySQL / PostgreSQL / MongoDB / Sqlite | 16mb | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
+
+### `dockette/adminer:mssql`
+
+Debian-based image with Microsoft ODBC Driver 18 and PHP `sqlsrv` / `pdo_sqlsrv` extensions.
+
+```sh
+docker run \
+    --rm \
+    -p 8080:80 \
+    dockette/adminer:mssql
+```
+
+By default, `TrustServerCertificate` is set to `yes` so the image works out of the box with self-signed certificates (common in development). You can control encryption behavior via environment variables:
+
+| Variable | Description | Default |
+|---|---|---|
+| `ADMINER_PLUGIN_MSSQL_ENCRYPT` | Set to `0` to disable the encryption plugin | enabled |
+| `ADMINER_MSSQL_ENCRYPT` | `yes`, `no`, or `strict` | not set |
+| `ADMINER_MSSQL_TRUST_CERT` | `yes` or `no` | `yes` |
 
 ### `dockette/adminer:dg`
 

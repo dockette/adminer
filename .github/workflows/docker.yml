@@ -40,6 +40,11 @@ jobs:
             tag: mongo
             platforms: linux/amd64,linux/arm64
 
+          - dockerfile: ./adminer-mssql/Dockerfile
+            context: .
+            tag: mssql
+            platforms: linux/amd64
+
           - dockerfile: ./adminer-mysql/Dockerfile
             context: .
             tag: mysql

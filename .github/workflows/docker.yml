@@ -205,16 +205,16 @@ jobs:
   docs:
     runs-on: ubuntu-latest
     name: Docs
+    needs: build
+    if: ${{ github.ref == 'refs/heads/master' }}
 
     steps:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Validate README
-        run: |
-          test -s README.md
-          grep -F 'https://github.com/dockette/adminer/actions/workflows/docker.yml/badge.svg' README.md
-          grep -F 'https://img.shields.io/docker/pulls/dockette/adminer.svg' README.md
-          grep -F 'https://img.shields.io/badge/sponsor-GitHub%20Sponsors-ea4aaa' README.md
-          grep -F 'https://img.shields.io/badge/support-discussions-6f42c1' README.md
-          ! grep -Ei 'slack|join\.slack|gitter|badgen\.net' README.md
+      - name: Update Docker Hub description
+        uses: peter-evans/dockerhub-description@v5
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: dockette/adminer

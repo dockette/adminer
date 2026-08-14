@@ -2,7 +2,7 @@ FROM dockette/debian:bookworm-slim
 
 LABEL maintainer="Milan Sulc <sulcmil@gmail.com>"
 
-ENV ADMINER_VERSION=5.4.4
+ENV ADMINER_VERSION=6.0.1
 ENV MEMORY=256M
 ENV UPLOAD=2048M
 ENV PORT=80

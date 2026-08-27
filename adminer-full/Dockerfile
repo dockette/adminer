@@ -34,7 +34,6 @@ RUN echo '@community https://dl-cdn.alpinelinux.org/alpine/v3.23/community' >> /
     mv /tmp/adminer-$ADMINER_VERSION/designs/* /srv/designs/ 2>/dev/null || true && \
     rm -rf /tmp/* && \
     mkdir -p /srv/adminer-plugins && \
-    ln -s /usr/bin/php84 /usr/bin/php && \
     apk del wget unzip ca-certificates && \
     rm -rf /var/cache/apk/*
 

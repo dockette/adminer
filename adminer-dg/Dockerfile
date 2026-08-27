@@ -26,7 +26,6 @@ RUN echo '@community https://dl-cdn.alpinelinux.org/alpine/v3.23/community' >> /
     wget https://github.com/dg/adminer-custom/archive/v$ADMINER_DG_VERION.tar.gz -O /srv/adminer.tgz && \
     tar zxvf /srv/adminer.tgz --strip-components=1 -C /srv && \
     rm /srv/adminer.tgz && \
-    ln -s /usr/bin/php84 /usr/bin/php && \
     apk del wget ca-certificates && \
     rm -rf /var/cache/apk/*
 

@@ -1,4 +1,4 @@
-FROM alpine:3.22
+FROM alpine:3.23
 
 LABEL maintainer="Milan Sulc <sulcmil@gmail.com>"
 
@@ -9,7 +9,7 @@ ENV PORT=80
 ENV WORKERS=8
 ENV PHP_CLI_SERVER_WORKERS=${WORKERS}
 
-RUN echo '@community http://nl.alpinelinux.org/alpine/v3.22/community' >> /etc/apk/repositories && \
+RUN echo '@community https://dl-cdn.alpinelinux.org/alpine/v3.23/community' >> /etc/apk/repositories && \
     apk update && \
     apk upgrade && \
     apk add \
@@ -31,7 +31,6 @@ RUN echo '@community http://nl.alpinelinux.org/alpine/v3.22/community' >> /etc/a
     mv /tmp/adminer-$ADMINER_EDITOR_VERSION/designs/* /srv/designs/ 2>/dev/null || true && \
     rm -rf /tmp/* && \
     mkdir -p /srv/adminer-plugins && \
-    ln -s /usr/bin/php84 /usr/bin/php && \
     apk del wget unzip ca-certificates && \
     rm -rf /var/cache/apk/*
 

@@ -2,7 +2,7 @@ FROM alpine:3.23
 
 LABEL maintainer="Milan Sulc <sulcmil@gmail.com>"
 
-ENV ADMINER_DG_VERION=6.1.0
+ENV ADMINER_DG_VERION=3.4.1
 ENV MEMORY=256M
 ENV UPLOAD=2048M
 ENV PORT=80

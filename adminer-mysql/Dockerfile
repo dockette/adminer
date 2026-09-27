@@ -1,15 +1,15 @@
-FROM alpine:3.22
+FROM alpine:3.24
 
 LABEL maintainer="Milan Sulc <sulcmil@gmail.com>"
 
-ENV ADMINER_VERSION=6.1.0
+ENV ADMINER_VERSION=6.1.1
 ENV MEMORY=256M
 ENV UPLOAD=2048M
 ENV PORT=80
 ENV WORKERS=8
 ENV PHP_CLI_SERVER_WORKERS=${WORKERS}
 
-RUN echo '@community http://nl.alpinelinux.org/alpine/v3.22/community' >> /etc/apk/repositories && \
+RUN echo '@community http://nl.alpinelinux.org/alpine/v3.24/community' >> /etc/apk/repositories && \
     apk update && \
     apk upgrade && \
     apk add \

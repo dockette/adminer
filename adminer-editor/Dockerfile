@@ -24,6 +24,7 @@ RUN echo '@community https://dl-cdn.alpinelinux.org/alpine/v3.24/community' >> /
         php84-json@community \
         php84-pecl-mongodb@community \
         tini && \
+    ln -s /usr/bin/php84 /usr/bin/php && \
     wget https://github.com/vrana/adminer/releases/download/v$ADMINER_EDITOR_VERSION/editor-$ADMINER_EDITOR_VERSION.php -O /srv/index.php && \
     wget https://github.com/vrana/adminer/releases/download/v$ADMINER_EDITOR_VERSION/adminer-$ADMINER_EDITOR_VERSION.zip -O /tmp/adminer-$ADMINER_EDITOR_VERSION.zip && \
     unzip /tmp/adminer-$ADMINER_EDITOR_VERSION.zip -d /tmp && \

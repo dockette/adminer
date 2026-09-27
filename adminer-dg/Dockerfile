@@ -23,6 +23,7 @@ RUN echo '@community https://dl-cdn.alpinelinux.org/alpine/v3.24/community' >> /
         php84-json@community \
         php84-pecl-mongodb@community \
         tini && \
+    ln -s /usr/bin/php84 /usr/bin/php && \
     wget https://github.com/dg/adminer-custom/archive/v$ADMINER_DG_VERION.tar.gz -O /srv/adminer.tgz && \
     tar zxvf /srv/adminer.tgz --strip-components=1 -C /srv && \
     rm /srv/adminer.tgz && \

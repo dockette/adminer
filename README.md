@@ -1,7 +1,14 @@
 <h1 align=center>Dockette / Adminer</h1>
 
 <p align=center>
-   🎁 Tiniest boxed dockerized Adminer (MySQL, PostgreSQL, SQLite, Mongo, Oracle, MSSQL) Dockerfiles. Database management in a single PHP file.
+   <a href="https://github.com/dockette/adminer/actions"><img src="https://github.com/dockette/adminer/actions/workflows/docker.yml/badge.svg" alt="GitHub Actions"></a>
+   <a href="https://hub.docker.com/r/dockette/adminer"><img src="https://img.shields.io/docker/pulls/dockette/adminer.svg" alt="Docker Hub pulls"></a>
+   <a href="https://github.com/sponsors/f3l1x"><img src="https://img.shields.io/badge/sponsor-GitHub%20Sponsors-ea4aaa" alt="GitHub Sponsors"></a>
+   <a href="https://github.com/orgs/dockette/discussions"><img src="https://img.shields.io/badge/support-discussions-6f42c1" alt="Support/Discussions"></a>
+</p>
+
+<p align=center>
+   <a href="https://www.adminer.org">Adminer</a> 6.1.0, the single-file database manager, served by the PHP 8.4 built-in web server. Each tag carries the drivers for one database (<code>mysql</code>, <code>postgres</code>, <code>mongo</code>, <code>mssql</code>, <code>oracle-19</code>) or for several (<code>full</code>), on Alpine Linux or Debian Bookworm. For developers who need a database UI next to a local or staging stack.
 </p>
 
 <p align=center>
@@ -9,164 +16,78 @@
 </p>
 
 <p align=center>
-   <a href="https://github.com/dockette/adminer/actions"><img src="https://github.com/dockette/adminer/actions/workflows/docker.yml/badge.svg" alt="GitHub Actions"></a>
-   <a href="https://hub.docker.com/r/dockette/adminer"><img src="https://img.shields.io/docker/pulls/dockette/adminer.svg" alt="Docker Hub pulls"></a>
-   <a href="https://github.com/sponsors/f3l1x"><img src="https://img.shields.io/badge/sponsor-GitHub%20Sponsors-ea4aaa" alt="GitHub Sponsors"></a>
-   <a href="https://github.com/orgs/dockette/discussions"><img src="https://img.shields.io/badge/support-discussions-6f42c1" alt="Support/Discussions"></a>
+   <img src=".docs/assets/adminer.png" alt="Adminer login screen" width="100%">
 </p>
 
-![Adminer](.docs/assets/adminer.png)
-
-------
-
-## Prologue
-
-There are few variants of this adminer image based:
-
-- full (mysql, pgsql, sqlite, mongo)
-- mysql (only)
-- pgsql (only)
-- mongo (only)
-- mssql (only)
-- oracle-11 / oracle-12 / oracle-19 (only)
-- dg (custom)
-
-**Features**
-
-- Alpine Linux (full, editor, dg, mongo, mysql, postgres)
-- Debian Bookworm (mssql, oracle-11, oracle-12, oracle-19)
-- PHP 8 (concurrency via PHP cli workers)
+-----
 
 ## Usage
 
-```sh
-docker run \
-    --rm
-    -p 8000:80
-    dockette/adminer:dg
-```
-
-By default container is running with these settings, you can override it using environment variables.
-
-- `MEMORY=256M` (memory_limit)
-- `UPLOAD=2048M` (upload_max_filesize, post_max_size)
-- `PORT=80` (PHP server listening port)
-- `WORKERS=4` (concurrency)
+Run the image and open `http://localhost:8000`:
 
 ```sh
-docker run \
-    --rm
-    -p 8000:8080
-    -e MEMORY=512M
-    -e UPLOAD=4096M
-    -e PORT=8080
-    dockette/adminer:dg
+docker run -p 8000:80 dockette/adminer
 ```
+
+The image adds the drivers for its tag, a set of upstream plugins and themes, and an entrypoint that sets them up
+from environment variables (see [Environment](#environment)). Pick a tag for your database from the table below;
+see the [Adminer documentation](https://www.adminer.org/en/plugins/) for what the plugins do.
+
+> [!CAUTION]
+> Adminer gives full access to every database it can reach. Don't expose the port to the internet, and never
+> publish a container with the autologin plugin enabled.
 
 ## Versions
 
-| Image                        | Technologies                          | Size | Docker Hub                                              |
-|------------------------------|---------------------------------------|------|---------------------------------------------------------|
-| dockette/adminer             | MySQL / PostgreSQL / MongoDB / Sqlite | 12mb | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
-| dockette/adminer:full        | MySQL / PostgreSQL / MongoDB / Sqlite | 12mb | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
-| dockette/adminer:mysql       | MySQL                                 | 9mb  | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
-| dockette/adminer:pgsql       | PostgreSQL                            | 8mb  | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
-| dockette/adminer:mongo       | MongoDB                               | 9mb  | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
-| dockette/adminer:mssql       | MS SQL Server                         | -    | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
-| dockette/adminer:dg          | MySQL / PostgreSQL / MongoDB / Sqlite | 16mb | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
+| Tag | Description |
+|-----|-------------|
+| `dockette/adminer:full` | MySQL, PostgreSQL, SQLite and MongoDB drivers, plus the upstream driver plugins; Alpine 3.23 |
+| `dockette/adminer:latest` | Same as `full` |
+| `dockette/adminer:editor` | [Adminer Editor](https://www.adminer.org/en/editor/) (data only) with MySQL, PostgreSQL and MongoDB; Alpine 3.23 |
+| `dockette/adminer:mysql` | MySQL and MariaDB; Alpine 3.22 |
+| `dockette/adminer:postgres` | PostgreSQL; Alpine 3.23 |
+| `dockette/adminer:mongo` | MongoDB; Alpine 3.23 |
+| `dockette/adminer:mssql` | MS SQL Server with Microsoft ODBC Driver 18 and `sqlsrv`, `pdo_sqlsrv`; Debian Bookworm, `linux/amd64` only |
+| `dockette/adminer:oracle-19` | Oracle with Instant Client 19.30 and `oci8`; Debian Bookworm, `linux/amd64` only |
+| `dockette/adminer:oracle-12` | Oracle with Instant Client 12.1 and `oci8`; Debian Bookworm, `linux/amd64` only |
+| `dockette/adminer:oracle-11` | Oracle with Instant Client 11.2 and `oci8`; Debian Bookworm, `linux/amd64` only |
+| `dockette/adminer:dg` | The `adminer-custom` 3.4.1 build with MySQL, PostgreSQL and MongoDB; Alpine 3.23. No plugins or themes |
 
-### `dockette/adminer:mssql`
+The Alpine tags are built for `linux/amd64` and `linux/arm64`; Microsoft and Oracle ship their drivers for
+`amd64` only. Every tag is rebuilt every Monday.
 
-Debian-based image with Microsoft ODBC Driver 18 and PHP `sqlsrv` / `pdo_sqlsrv` extensions.
+## Environment
 
-```sh
-docker run \
-    --rm \
-    -p 8080:80 \
-    dockette/adminer:mssql
-```
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `MEMORY` | `256M` | PHP `memory_limit` |
+| `UPLOAD` | `2048M` | PHP `upload_max_filesize` and `post_max_size` |
+| `PORT` | `80` | Port of the PHP built-in web server inside the container |
+| `PHP_CLI_SERVER_WORKERS` | `8` | Number of PHP server workers. `WORKERS` only sets it at build time |
+| `ADMINER_THEME` | (none) | Theme name from the table below |
+| `ADMINER_PLUGIN_AUTOLOGIN` | (off) | `1` enables the autologin plugin |
+| `ADMINER_AUTOLOGIN_SERVER` | (none) | DSN for autologin |
+| `ADMINER_PLUGIN_SERVER_LIST` | (off) | `1` enables the server list plugin |
+| `ADMINER_SERVERS_{Name}` | (none) | DSN of one server in the list; `{Name}` is its label |
+| `ADMINER_PLUGIN_MSSQL_ENCRYPT` | (on) | `mssql` only: `0` disables the encryption plugin |
+| `ADMINER_MSSQL_ENCRYPT` | (not set) | `mssql` only: `yes`, `no` or `strict` |
+| `ADMINER_MSSQL_TRUST_CERT` | `yes` | `mssql` only: `TrustServerCertificate`, `yes` or `no` |
+| `ADMINER_BANNER` | (on) | `0`, `false`, `no` or `off` hides the start banner |
+| `ADMINER_DEBUG` | (off) | `1` traces the entrypoint with `set -x` |
 
-By default, `TrustServerCertificate` is set to `yes` so the image works out of the box with self-signed certificates (common in development). You can control encryption behavior via environment variables:
-
-| Variable | Description | Default |
-|---|---|---|
-| `ADMINER_PLUGIN_MSSQL_ENCRYPT` | Set to `0` to disable the encryption plugin | enabled |
-| `ADMINER_MSSQL_ENCRYPT` | `yes`, `no`, or `strict` | not set |
-| `ADMINER_MSSQL_TRUST_CERT` | `yes` or `no` | `yes` |
-
-### `dockette/adminer:dg`
-
-> Customization for the best database management tool written in PHP, Adminer
-
-You should take a look to the official github profile (https://github.com/dg/adminer-custom).
-
-![Adminer DG](.docs/assets/adminer-dg.png)
+The `ADMINER_*` variables for themes and plugins work in every tag except `dg`.
 
 ## Plugins
 
-Adminer plugins can be enabled via environment variables. All plugins are disabled by default. Available for all image variants except `dg`.
-
-### Autologin
-
-Skips the login form and connects directly to a database server.
-
-| Variable | Description |
-|---|---|
-| `ADMINER_PLUGIN_AUTOLOGIN=1` | Enable the autologin plugin |
-| `ADMINER_AUTOLOGIN_SERVER` | DSN connection string |
-
-DSN format: `driver://username:password@host:port/database`
-
-```sh
-docker run \
-    --rm \
-    -p 8080:80 \
-    -e ADMINER_PLUGIN_AUTOLOGIN=1 \
-    -e ADMINER_AUTOLOGIN_SERVER=server://root:secret@mysql:3306/mydb \
-    dockette/adminer:full
-```
-
-Supported drivers: `server` (MySQL/MariaDB), `pgsql`, `sqlite`, `mongo`, `oracle`, `elastic`.
-
-### Server List
-
-Displays a dropdown of pre-configured database servers with an **Auto Sign-In** button. Credentials are handled server-side and never exposed to the browser.
-
-| Variable | Description |
-|---|---|
-| `ADMINER_PLUGIN_SERVER_LIST=1` | Enable the server list plugin |
-| `ADMINER_SERVERS_<Name>` | DSN for each server (suffix becomes the display name) |
-
-```sh
-docker run \
-    --rm \
-    -p 8080:80 \
-    -e ADMINER_PLUGIN_SERVER_LIST=1 \
-    -e ADMINER_SERVERS_MySQL=server://root:secret@mysql:3306/mydb \
-    -e ADMINER_SERVERS_PostgreSQL=pgsql://postgres:pwd@pg:5432/app \
-    -e ADMINER_SERVERS_DevDB=server://dev@devhost:3306 \
-    dockette/adminer:full
-```
-
-Servers without credentials in the DSN (e.g. `server://devhost:3306`) appear in the dropdown but require manual login. The **Auto Sign-In** button only appears for servers with stored credentials.
-
-> **Note:** Autologin takes precedence over Server List. If both plugins are enabled, only Autologin is activated.
+Plugins are off by default and are switched on with the `ADMINER_PLUGIN_*` variables. A DSN has the form
+`driver://username:password@host:port/database`, where `driver` is `server` (MySQL and MariaDB), `pgsql`,
+`sqlite`, `oracle` or `mongo`. The server list keeps the credentials on the server; when autologin is also on,
+only autologin is active. The `mssql` tag has no autologin and no server list.
 
 ## Themes
 
-You can apply a theme by setting the `ADMINER_THEME` environment variable:
-
-```sh
-docker run \
-    --rm
-    -p 8000:80
-    -e ADMINER_THEME=dracula
-    dockette/adminer:full
-```
-
-If the specified theme is not found, the container will list all available themes.
-
-### Available Themes
+`ADMINER_THEME` selects one of the themes from the Adminer release, for example `ADMINER_THEME=dracula`. When the
+theme is not found, the container prints the available names and starts with the default look.
 
 <table>
 <tr>
@@ -213,14 +134,23 @@ If the specified theme is not found, the container will list all available theme
 </tr>
 </table>
 
-## Upgrade
+## Adminer Custom
 
-**Upgrade Adminer and Adminer Editor versions to X.Y.Z**
+The `dg` tag serves the [`adminer-custom`](https://github.com/dg/adminer-custom) project, a customised Adminer with its own plugins and look, instead of
+the upstream release.
 
-```bash
-ADMINER_VERSION=4.8.1 make update-versions
+<img src=".docs/assets/adminer-dg.png" alt="adminer-custom login screen" width="100%">
+
+## Development
+
+```sh
+make build   # build every tag
+make test    # smoke test every tag
+make run     # run the full tag on port 8000
 ```
+
+Run `make` to list every target.
 
 ## Maintenance
 
-See [how to contribute](https://github.com/dockette/.github/blob/master/CONTRIBUTING.md) to this package. Consider to [support](https://github.com/sponsors/f3l1x) **f3l1x**. Thank you for using this package.
+See [how to contribute](https://github.com/dockette/.github/blob/master/CONTRIBUTING.md) to this package. Consider [supporting](https://github.com/sponsors/f3l1x) **f3l1x**. Thank you for using this package.

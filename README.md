@@ -23,24 +23,15 @@
 
 ## Usage
 
-Run Adminer with the MySQL, PostgreSQL, SQLite and MongoDB drivers on port `8000`:
+Run the image and open `http://localhost:8000`:
 
 ```sh
-docker run --rm -p 8000:80 dockette/adminer:full
+docker run -p 8000:80 dockette/adminer
 ```
 
-Open `http://localhost:8000` and log in to your database server. The image is based on `alpine:3.23` and needs
-no volume. It listens on port `80`, runs as root and has no `HEALTHCHECK`.
-
-Change the PHP limits and the port:
-
-```sh
-docker run --rm -p 8000:8080 \
-    -e MEMORY=512M \
-    -e UPLOAD=4096M \
-    -e PORT=8080 \
-    dockette/adminer:full
-```
+The image adds the drivers for its tag, a set of upstream plugins and themes, and an entrypoint that sets them up
+from environment variables (see [Environment](#environment)). Pick a tag for your database from the table below;
+see the [Adminer documentation](https://www.adminer.org/en/plugins/) for what the plugins do.
 
 > [!CAUTION]
 > Adminer gives full access to every database it can reach. Don't expose the port to the internet, and never
@@ -88,59 +79,15 @@ The `ADMINER_*` variables for themes and plugins work in every tag except `dg`.
 
 ## Plugins
 
-Plugins are off by default. A DSN has the form `driver://username:password@host:port/database`, where `driver`
-is the Adminer driver name: `server` (MySQL and MariaDB), `pgsql`, `sqlite`, `oracle` or `mongo`.
-
-### Autologin
-
-Autologin skips the login form and connects to one server with the credentials from the DSN:
-
-```sh
-docker run --rm -p 8000:80 \
-    -e ADMINER_PLUGIN_AUTOLOGIN=1 \
-    -e ADMINER_AUTOLOGIN_SERVER=server://root:secret@mysql:3306/mydb \
-    dockette/adminer:full
-```
-
-### Server List
-
-The server list replaces the server field with a dropdown of preset servers and adds an Auto Sign-In button for
-servers with stored credentials. The credentials stay on the server and never reach the browser:
-
-```sh
-docker run --rm -p 8000:80 \
-    -e ADMINER_PLUGIN_SERVER_LIST=1 \
-    -e ADMINER_SERVERS_MySQL=server://root:secret@mysql:3306/mydb \
-    -e ADMINER_SERVERS_PostgreSQL=pgsql://postgres:pwd@pg:5432/app \
-    -e ADMINER_SERVERS_DevDB=server://devhost:3306 \
-    dockette/adminer:full
-```
-
-A server without credentials in its DSN, like `DevDB` above, is listed but needs a manual login.
-
-> [!NOTE]
-> Autologin takes precedence. When both plugins are enabled, only autologin is active.
-
-### MSSQL Encryption
-
-The `mssql` tag enables its encryption plugin by default with `TrustServerCertificate=yes`, so it connects to
-servers with self-signed certificates:
-
-```sh
-docker run --rm -p 8000:80 -e ADMINER_MSSQL_ENCRYPT=strict -e ADMINER_MSSQL_TRUST_CERT=no dockette/adminer:mssql
-```
-
-The `mssql` tag has no autologin and no server list.
+Plugins are off by default and are switched on with the `ADMINER_PLUGIN_*` variables. A DSN has the form
+`driver://username:password@host:port/database`, where `driver` is `server` (MySQL and MariaDB), `pgsql`,
+`sqlite`, `oracle` or `mongo`. The server list keeps the credentials on the server; when autologin is also on,
+only autologin is active. The `mssql` tag has no autologin and no server list.
 
 ## Themes
 
-`ADMINER_THEME` selects one of the themes from the Adminer release:
-
-```sh
-docker run --rm -p 8000:80 -e ADMINER_THEME=dracula dockette/adminer:full
-```
-
-When the theme is not found, the container prints the available names and starts with the default look.
+`ADMINER_THEME` selects one of the themes from the Adminer release, for example `ADMINER_THEME=dracula`. When the
+theme is not found, the container prints the available names and starts with the default look.
 
 <table>
 <tr>
@@ -190,41 +137,19 @@ When the theme is not found, the container prints the available names and starts
 ## Adminer Custom
 
 The `dg` tag serves the [`adminer-custom`](https://github.com/dg/adminer-custom) project, a customised Adminer with its own plugins and look, instead of
-the upstream release:
-
-```sh
-docker run --rm -p 8000:80 dockette/adminer:dg
-```
+the upstream release.
 
 <img src=".docs/assets/adminer-dg.png" alt="adminer-custom login screen" width="100%">
 
-## Compose
-
-The [`docker-compose.yml`](https://github.com/dockette/adminer/blob/master/docker-compose.yml) in this repository
-builds the `full` image and starts it on port `8080` next to MariaDB 11 and PostgreSQL 17, with the server list
-plugin enabled:
-
-```sh
-docker compose up --build
-```
-
 ## Development
 
-Build and test all tags, or build and run one of them on port `8000`:
-
 ```sh
-make build
-make test
-make build-mysql
-make run-mysql
+make build   # build every tag
+make test    # smoke test every tag
+make run     # run the full tag on port 8000
 ```
 
-`make test` runs `php --version` in each image. `make help` lists every target. To move all Dockerfiles to a new
-Adminer release (the `sed` call needs macOS or BSD `sed`):
-
-```sh
-ADMINER_VERSION=6.1.0 make update-versions
-```
+Run `make` to list every target.
 
 ## Maintenance
 

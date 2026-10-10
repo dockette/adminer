@@ -203,18 +203,10 @@ jobs:
           cache-to: type=gha,mode=max
 
   docs:
-    runs-on: ubuntu-latest
     name: Docs
     needs: build
-    if: ${{ github.ref == 'refs/heads/master' }}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-
-      - name: Update Docker Hub description
-        uses: peter-evans/dockerhub-description@v5
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: dockette/adminer
+    if: github.ref == 'refs/heads/master'
+    uses: dockette/.github/.github/workflows/dockerhub-description.yml@master
+    secrets: inherit
+    with:
+      image: "dockette/adminer"

@@ -223,8 +223,18 @@ ADMINER_VERSION=4.8.1 make update-versions
 
 ## Release version
 
-The release version is the date in [`VERSION`](VERSION). CI pushes `latest` also as `dockette/adminer:<VERSION>`.
-To release, run `make release`, commit and push to `master`.
+The release version is the date in [`VERSION`](VERSION). The Adminer version is pinned in the Dockerfiles
+(`ADMINER_VERSION`). On `master`, CI pushes the `latest` image under four tags:
+
+| Tag | What it is |
+|-----|------------|
+| `dockette/adminer:latest` | latest build of `master` |
+| `dockette/adminer:2026.10.23` | release `2026.10.23` |
+| `dockette/adminer:6.1.1` | latest build with Adminer `6.1.1` |
+| `dockette/adminer:6.1.1-2026.10.23` | Adminer `6.1.1` in release `2026.10.23`; pin this one |
+
+To release, run `make release`, commit and push to `master`. An Adminer upgrade (`make update-versions`) is a
+release too.
 
 ## Maintenance
 

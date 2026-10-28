@@ -19,20 +19,13 @@
 
 ------
 
-## Prologue
+[Adminer](https://www.adminer.org) is a database management tool in a single PHP file. These are the tiniest boxed
+Dockerfiles for it: one image per database family (MySQL, PostgreSQL, SQLite, Mongo, Oracle, MSSQL).
 
-There are few variants of this adminer image based:
+## Features
 
-- full (mysql, pgsql, sqlite, mongo)
-- mysql (only)
-- pgsql (only)
-- mongo (only)
-- mssql (only)
-- oracle-11 / oracle-12 / oracle-19 (only)
-- dg (custom)
-
-**Features**
-
+- Variants: full (mysql, pgsql, sqlite, mongo), mysql, pgsql, mongo, mssql, oracle-11 / oracle-12 / oracle-19 (each
+  only), dg (custom)
 - Alpine Linux (full, editor, dg, mongo, mysql, postgres)
 - Debian Bookworm (mssql, oracle-11, oracle-12, oracle-19)
 - PHP 8 (concurrency via PHP cli workers)
@@ -40,37 +33,33 @@ There are few variants of this adminer image based:
 ## Usage
 
 ```sh
-docker run \
-    --rm
-    -p 8000:80
-    dockette/adminer:dg
+docker run --rm -p 8000:80 dockette/adminer:dg
+
+# Override the defaults with environment variables
+docker run --rm -p 8000:8080 -e MEMORY=512M -e UPLOAD=4096M -e PORT=8080 dockette/adminer:dg
+
+# Apply a theme
+docker run --rm -p 8000:80 -e ADMINER_THEME=dracula dockette/adminer:full
 ```
 
-By default container is running with these settings, you can override it using environment variables.
+## Configuration
+
+The container runs with these settings by default. Override them with environment variables.
 
 - `MEMORY=256M` (memory_limit)
 - `UPLOAD=2048M` (upload_max_filesize, post_max_size)
 - `PORT=80` (PHP server listening port)
 - `WORKERS=4` (concurrency)
+- `ADMINER_THEME` (theme name, see [Themes](#themes); an unknown name lists all available themes)
 
-```sh
-docker run \
-    --rm
-    -p 8000:8080
-    -e MEMORY=512M
-    -e UPLOAD=4096M
-    -e PORT=8080
-    dockette/adminer:dg
-```
-
-## Versions
+## Images
 
 | Image                        | Technologies                          | Size | Docker Hub                                              |
 |------------------------------|---------------------------------------|------|---------------------------------------------------------|
 | dockette/adminer             | MySQL / PostgreSQL / MongoDB / Sqlite | 12mb | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
 | dockette/adminer:full        | MySQL / PostgreSQL / MongoDB / Sqlite | 12mb | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
 | dockette/adminer:mysql       | MySQL                                 | 9mb  | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
-| dockette/adminer:pgsql       | PostgreSQL                            | 8mb  | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
+| dockette/adminer:postgres    | PostgreSQL                            | 8mb  | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
 | dockette/adminer:mongo       | MongoDB                               | 9mb  | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
 | dockette/adminer:mssql       | MS SQL Server                         | -    | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
 | dockette/adminer:dg          | MySQL / PostgreSQL / MongoDB / Sqlite | 16mb | [link](https://hub.docker.com/r/dockette/adminer/tags/) |
@@ -154,17 +143,8 @@ Servers without credentials in the DSN (e.g. `server://devhost:3306`) appear in 
 
 ## Themes
 
-You can apply a theme by setting the `ADMINER_THEME` environment variable:
-
-```sh
-docker run \
-    --rm
-    -p 8000:80
-    -e ADMINER_THEME=dracula
-    dockette/adminer:full
-```
-
-If the specified theme is not found, the container will list all available themes.
+Set the `ADMINER_THEME` environment variable to apply a theme, see [Usage](#usage). If the specified theme
+is not found, the container lists all available themes.
 
 ### Available Themes
 
@@ -213,18 +193,30 @@ If the specified theme is not found, the container will list all available theme
 </tr>
 </table>
 
-## Upgrade
+## Versions
 
-**Upgrade Adminer and Adminer Editor versions to X.Y.Z**
+| Version | Release |
+|---------|---------|
+| `dockette/adminer:6.1.1-YYYY.MM.DD` | release `YYYY.MM.DD` |
+| `dockette/adminer:6.1.1` | latest release |
+| `dockette/adminer:YYYY.MM.DD` | release `YYYY.MM.DD` |
+| `dockette/adminer:latest` | latest build of `master` (same as `full`) |
+| `dockette/adminer:<variant>` | latest build of `master` for the variant, see [Images](#images) |
 
-```bash
-ADMINER_VERSION=4.8.1 make update-versions
+All versions build on Adminer `6.1.1`, pinned in `VERSION` and in the Dockerfiles (`ADMINER_VERSION`). Releases are
+listed on [GitHub](https://github.com/dockette/adminer/releases).
+
+## Development
+
+```sh
+make build                                     # build all images
+make build-<variant>                           # build one image, e.g. build-mysql
+make test                                      # run php --version in all images
+make run                                       # run the full image on port 8000
+make update-versions ADMINER_VERSION=X.Y.Z     # set the Adminer and Adminer Editor version
+make version                                   # print VERSION
+make release                                   # set today's date in VERSION
 ```
-
-## Release version
-
-The release version is the date in [`VERSION`](VERSION). CI pushes `latest` also as `dockette/adminer:<VERSION>`.
-To release, run `make release`, commit and push to `master`.
 
 ## Maintenance
 

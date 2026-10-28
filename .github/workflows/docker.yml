@@ -186,7 +186,22 @@ jobs:
 
       - name: Read VERSION
         id: version
-        run: echo "version=$(cat VERSION)" >> "$GITHUB_OUTPUT"
+        run: cat VERSION >> "$GITHUB_OUTPUT"
+
+      # latest is also pushed as <VERSION>, <ADMINER_VERSION> and <ADMINER_VERSION>-<VERSION>
+      - name: Tags
+        id: tags
+        env:
+          TAG: ${{ matrix.tag }}
+          VERSION: ${{ steps.version.outputs.VERSION }}
+          ADMINER_VERSION: ${{ steps.version.outputs.ADMINER_VERSION }}
+        run: |
+          {
+            echo "tags<<EOF"
+            echo "dockette/adminer:$TAG"
+            if [ "$TAG" = latest ]; then printf 'dockette/adminer:%s\n' "$VERSION" "$ADMINER_VERSION" "$ADMINER_VERSION-$VERSION"; fi
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
 
       - name: Login to DockerHub
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
@@ -201,9 +216,7 @@ jobs:
           context: ${{ matrix.context }}
           file: ${{ matrix.dockerfile }}
           push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
-          tags: |
-            dockette/adminer:${{ matrix.tag }}
-            ${{ matrix.tag == 'latest' && format('dockette/adminer:{0}', steps.version.outputs.version) || '' }}
+          tags: ${{ steps.tags.outputs.tags }}
           platforms: ${{ matrix.platforms }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -222,7 +235,9 @@ jobs:
       - name: Create release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release view "$(cat VERSION)" || gh release create "$(cat VERSION)" --generate-notes
+        run: |
+          . ./VERSION
+          gh release view "$VERSION" || gh release create "$VERSION" --generate-notes
 
   docs:
     name: Docs

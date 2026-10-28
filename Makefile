@@ -2,7 +2,7 @@ DOCKER_IMAGE=dockette/adminer
 DOCKER_PLATFORMS?=linux/amd64
 DOCKER_RUN_PORT?=8000
 DOCKER_RUN_TAG?=full
-VERSION:=$(shell cat VERSION)
+include VERSION
 
 build: build-all
 
@@ -61,6 +61,7 @@ run-oracle-12: _docker-run-oracle-12
 run-oracle-19: _docker-run-oracle-19
 
 update-versions:
+	@sed -i.bak "s/^ADMINER_VERSION=.*/ADMINER_VERSION=${ADMINER_VERSION}/" VERSION && rm VERSION.bak
 	find . -type f -name Dockerfile -exec sed -i '' 's/ENV ADMINER_VERSION=.*/ENV ADMINER_VERSION=${ADMINER_VERSION}/g' {} +
 	find . -type f -name Dockerfile -exec sed -i '' 's/ENV ADMINER_EDITOR_VERSION=.*/ENV ADMINER_EDITOR_VERSION=${ADMINER_VERSION}/g' {} +
 
@@ -70,6 +71,5 @@ version:
 
 .PHONY: release
 release:
-	@date -u +%Y.%m.%d > VERSION
-	@echo "VERSION: ${VERSION} -> $$(cat VERSION)"
-	@echo "next: git commit -am \"Release: $$(cat VERSION)\" && git push"
+	@sed -i.bak "s/^VERSION=.*/VERSION=$$(date -u +%Y.%m.%d)/" VERSION && rm VERSION.bak
+	@cat VERSION

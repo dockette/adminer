@@ -87,12 +87,18 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v4
 
+      - name: Read VERSION
+        id: version
+        run: cat VERSION >> "$GITHUB_OUTPUT"
+
       - name: Build image for testing (linux/amd64)
         uses: docker/build-push-action@v7
         with:
           context: ${{ matrix.context }}
           file: ${{ matrix.dockerfile }}
           push: false
+          build-args: |
+            ADMINER_VERSION=${{ steps.version.outputs.ADMINER_VERSION }}
           tags: dockette/adminer:${{ matrix.tag }}-test
           platforms: linux/amd64
           cache-from: type=gha
@@ -186,7 +192,7 @@ jobs:
 
       - name: Read VERSION
         id: version
-        run: echo "version=$(cat VERSION)" >> "$GITHUB_OUTPUT"
+        run: cat VERSION >> "$GITHUB_OUTPUT"
 
       - name: Login to DockerHub
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
@@ -201,9 +207,13 @@ jobs:
           context: ${{ matrix.context }}
           file: ${{ matrix.dockerfile }}
           push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
+          build-args: |
+            ADMINER_VERSION=${{ steps.version.outputs.ADMINER_VERSION }}
           tags: |
             dockette/adminer:${{ matrix.tag }}
-            ${{ matrix.tag == 'latest' && format('dockette/adminer:{0}', steps.version.outputs.version) || '' }}
+            ${{ matrix.tag == 'latest' && format('dockette/adminer:{0}', steps.version.outputs.VERSION) || '' }}
+            ${{ matrix.tag == 'latest' && format('dockette/adminer:{0}', steps.version.outputs.ADMINER_VERSION) || '' }}
+            ${{ matrix.tag == 'latest' && format('dockette/adminer:{0}-{1}', steps.version.outputs.ADMINER_VERSION, steps.version.outputs.VERSION) || '' }}
           platforms: ${{ matrix.platforms }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
@@ -222,7 +232,9 @@ jobs:
       - name: Create release
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release view "$(cat VERSION)" || gh release create "$(cat VERSION)" --generate-notes
+        run: |
+          . ./VERSION
+          gh release view "$VERSION" || gh release create "$VERSION" --generate-notes
 
   docs:
     name: Docs

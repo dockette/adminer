@@ -2,7 +2,7 @@ FROM alpine:3.24
 
 LABEL maintainer="Milan Sulc <sulcmil@gmail.com>"
 
-ENV ADMINER_EDITOR_VERSION=6.1.1
+ARG ADMINER_VERSION=6.1.1
 ENV MEMORY=256M
 ENV UPLOAD=2048M
 ENV PORT=80
@@ -25,11 +25,11 @@ RUN echo '@community https://dl-cdn.alpinelinux.org/alpine/v3.24/community' >> /
         php84-pecl-mongodb@community \
         tini && \
     ln -s /usr/bin/php84 /usr/bin/php && \
-    wget https://github.com/vrana/adminer/releases/download/v$ADMINER_EDITOR_VERSION/editor-$ADMINER_EDITOR_VERSION.php -O /srv/index.php && \
-    wget https://github.com/vrana/adminer/releases/download/v$ADMINER_EDITOR_VERSION/adminer-$ADMINER_EDITOR_VERSION.zip -O /tmp/adminer-$ADMINER_EDITOR_VERSION.zip && \
-    unzip /tmp/adminer-$ADMINER_EDITOR_VERSION.zip -d /tmp && \
+    wget https://github.com/vrana/adminer/releases/download/v$ADMINER_VERSION/editor-$ADMINER_VERSION.php -O /srv/index.php && \
+    wget https://github.com/vrana/adminer/releases/download/v$ADMINER_VERSION/adminer-$ADMINER_VERSION.zip -O /tmp/adminer-$ADMINER_VERSION.zip && \
+    unzip /tmp/adminer-$ADMINER_VERSION.zip -d /tmp && \
     mkdir -p /srv/designs && \
-    mv /tmp/adminer-$ADMINER_EDITOR_VERSION/designs/* /srv/designs/ 2>/dev/null || true && \
+    mv /tmp/adminer-$ADMINER_VERSION/designs/* /srv/designs/ 2>/dev/null || true && \
     rm -rf /tmp/* && \
     mkdir -p /srv/adminer-plugins && \
     apk del wget unzip ca-certificates && \
